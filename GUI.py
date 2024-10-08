@@ -14,3 +14,17 @@ def path_dir_catalog():
     dir_name = r'\storage_recipe'
     path_dir=path_catalog+dir_name
     return path_dir
+
+#Импорт списков констант
+from bl_lower import list_name_action
+#Проверка ввода имени объекта взаимодействия
+def action_name():
+    action = input('С чем хотите работать(catalog, recipe) > ')
+    while action not in list_name_action:
+        if action == 'quit':
+            quit()
+        elif action == '':
+            action = input('Вы ничего не ввели, попробуйте снова a > ')
+        else:
+            action = input('Вы ввели неверный запрос, попробуйте снова a > ')
+    return action
