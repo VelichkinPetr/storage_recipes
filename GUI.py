@@ -7,6 +7,20 @@ def info():
       'Для вызова справки, введите \'help\'\n'
       'Для выхода из приложения, введите \'quit\'\n')
 
+#Подсказка для пользователя о функция доступных с конкретными данными
+def my_help(action):
+    if action == 'catalog':
+        print('Доступные функции для работы с Каталогом:\n'
+              'create_catalog - создать каталог\n'
+              'catalog_list - получить список всех каталогов\n'
+              'search_catalog - найти каталог по его названию\n'
+              'delete_catalog - удатиль каталог\n'
+              'recipes_in_catalog - чтение каталога - вывод всех рецептов в нем.\n')
+    elif action == 'recipe':
+        print('Доступные функции для работы с Рецептами:\n'
+              'append_recipe - добавление рецепта\n'
+              'search_recipe - найти рецепт по его наименованию\n'
+              'delete_recipe - удатиль рецепт.\n')
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
     while path_catalog == '':
