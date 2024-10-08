@@ -21,6 +21,14 @@ def my_help(action):
               'append_recipe - добавление рецепта\n'
               'search_recipe - найти рецепт по его наименованию\n'
               'delete_recipe - удатиль рецепт.\n')
+
+#Проверка ввода имени каталога и пути его создания:
+def name_new_catalog():
+    name_catalog=input('Введи имя каталога > ')
+    while name_catalog=='':
+        name_catalog = input('Вы ничего не ввели, попробуйте снова catalog > ')
+    return name_catalog
+
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
     while path_catalog == '':
