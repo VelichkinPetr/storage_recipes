@@ -16,7 +16,7 @@ def path_dir_catalog():
     return path_dir
 
 #Импорт списков констант
-from bl_lower import list_name_function, list_name_action
+from bl_lower import list_name_function, list_name_action, list_format
 #Проверка ввода имени объекта взаимодействия
 def action_name():
     action = input('С чем хотите работать(catalog, recipe) > ')
@@ -40,3 +40,13 @@ def function_name(action):
         else:
             function = input('Вы ввели неверный запрос, попробуйте снова f > ')
     return function
+
+#Проверка ввода формата каталога
+def format_catalog():
+    format_catalog = input('Введи расширение каталога > ')
+    while format_catalog not in list_format:
+        if format_catalog == '':
+            format_catalog = input('Вы ничего не ввели, попробуйте снова format > ')
+        else:
+            format_catalog = input('Вы ввели неверный запрос, попробуйте снова format > ')
+    return format_catalog
