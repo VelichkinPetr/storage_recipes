@@ -10,7 +10,7 @@ list_format=['.txt','.rtf','.doc','.docx']
 
 from GUI import action_name, function_name, my_help
 #список всех возможных функций
-list_function=[bl_upper.create_catalog,'catalog_list','search_catalog','delete_catalog','recipes_in_catalog','append_recipe','search_recipe','delete_recipe',my_help]
+list_function=[bl_upper.create_catalog,bl_upper.catalog_list,'search_catalog','delete_catalog','recipes_in_catalog','append_recipe','search_recipe','delete_recipe',my_help]
 
 #Функция ищет функцию по ее имени и запускает ее
 def use_function(action,function):
