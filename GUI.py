@@ -16,7 +16,7 @@ def path_dir_catalog():
     return path_dir
 
 #Импорт списков констант
-from bl_lower import list_name_action
+from bl_lower import list_name_function, list_name_action
 #Проверка ввода имени объекта взаимодействия
 def action_name():
     action = input('С чем хотите работать(catalog, recipe) > ')
@@ -28,3 +28,15 @@ def action_name():
         else:
             action = input('Вы ввели неверный запрос, попробуйте снова a > ')
     return action
+
+#Проверка ввода имени функции
+def function_name(action):
+    function = input(f'Выберите действие с {action} > ')
+    while function not in list_name_function:
+        if function == 'quit':
+            quit()
+        elif function == '':
+            function = input('Вы ничего не ввели, попробуйте снова f > ')
+        else:
+            function = input('Вы ввели неверный запрос, попробуйте снова f > ')
+    return function
