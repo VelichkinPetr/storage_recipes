@@ -1,11 +1,54 @@
 #бесконечный цикл работы приложения, в котором мы спрашиваем у пользователя, что он хочет сделать и хочет ли вообще дальше работать
-from bl_lower import use_function
+import bl_upper
 import GUI
-GUI.info()
-path= GUI.path_dir_catalog()
-def core(action,function):
+
+def core():
+    GUI.info()
+
+    path = GUI.path_dir_catalog()
+    bl_upper.create_catalog_dir(path)
+
+    action = GUI.action_name()
+    GUI.get_help(action)
+
+    function = GUI.function_name(action)
     while action != 'end':
         if action == 'catalog':
-            action,function,use_func=use_function(action,function)
+            if function == 'back':
+                action = GUI.action_name()
+                GUI.get_help(action)
+                function = GUI.function_name(action)
+            else:
+                if function == 'quit':
+                    quit()
+                elif function == 'help':
+                    GUI.get_help(action)
+                elif function == 'create':
+                    bl_upper.create_catalog(path)
+                elif function == 'list':
+                    bl_upper.get_catalog_list(path,action)
+                elif function == 'search':
+                    print()
+                elif function == 'delete':
+                   print()
+                function = GUI.function_name(action)
         elif action == 'recipe':
-            action,function,use_func=use_function(action,function)
+            if function == 'back':
+                action = GUI.action_name()
+                GUI.get_help(action)
+                function = GUI.function_name(action)
+            else:
+                if function == 'quit':
+                    quit()
+                elif function == 'help':
+                    GUI.get_help(action)
+                elif function == 'append':
+                    print()
+                elif function == 'read':
+                    print()
+                elif function == 'search':
+                    print()
+                elif function == 'delete':
+                    print()
+                function = GUI.function_name(action)
+
