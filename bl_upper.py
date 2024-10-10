@@ -36,9 +36,26 @@ def delete_catalog(path):
         print(f'Файл успешно удален!')
     else:
         print(f'Файл {name + format_file} не найден')
-#recipes_in_catalog
 
 #Функции работы с рецептами
+def append_recipe(path):
+    name,format_file,path_catalog = bl_lower.input_(path)
+    if os.path.isfile(path_catalog):
+        app_recipe = ';'.join(GUI.new_recipe())
+        with open(path_catalog,'a+') as file_object:
+            file_object.seek(0)
+            data = file_object.read(100)
+            if len(data)>0:
+                file_object.write('\n' + app_recipe)
+                file_object.close()
+            else:
+                file_object.write(app_recipe)
+                file_object.close()
+            print(f'Рецепт успешно записан!')
+    else:
+        print(f'Файл {name + format_file} не найден')
+
+
 #append_recipe
 #search_recipe
 #delete_recipe

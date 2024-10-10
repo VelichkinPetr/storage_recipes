@@ -43,7 +43,7 @@ def core():
                 elif function == 'help':
                     GUI.get_help(action)
                 elif function == 'append':
-                    print()
+                    bl_upper.append_recipe(path)
                 elif function == 'read':
                     print()
                 elif function == 'search':
