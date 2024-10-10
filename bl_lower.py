@@ -38,6 +38,20 @@ def get_len_and_date_file(path,lst):
             list_len_and_date.append(f' Рецептов:{len_catalog}, Дата создания:{date_catalog}')
     return list_len_and_date
 
+#Получение списка столбцов из каталога
+def get_list_column(lst,index_column):
+    lst_matrix = []
+    for line in lst:
+        row = line.split(';')
+        lst_matrix.append(row)
+
+    list_column = []
+    for i in range(len(lst_matrix)):
+        index_start = lst_matrix[i][index_column].index(':') + 1
+        name_recipe = lst_matrix[i][index_column][index_start:]
+        list_column.append(name_recipe)
+    return list_column
+
 #Цветовая окраска выводимых сообщений
 def blue(text):
     return f'\033[34m{text}'
