@@ -47,7 +47,7 @@ def core():
                 elif function == 'read':
                     bl_upper.get_names_recipes(path)
                 elif function == 'search':
-                    print(bl_upper.search_recipe( bl_upper.get_names_recipes(GUI.get_lst_file(path) ) )[0] )
+                    bl_upper.search_recipe(path)
                 elif function == 'delete':
                     print()
                 function = GUI.function_name(action)

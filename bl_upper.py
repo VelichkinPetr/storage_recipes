@@ -75,22 +75,33 @@ def get_names_recipes(path):
     else:
         print(f'Файл {name + format_file} не найден')
 
-def search_recipe(names_recipes):
-    if isinstance(names_recipes[0], list):
-        lst=names_recipes[1]
-        lst_name = names_recipes[0]
-        recipe_search = GUI.name_recipe()
-        if recipe_search in lst_name:
-            for i, string in enumerate(lst_name):
-                if recipe_search == string:
-                    index_search_name = i
-                    new_lst_search = ';\n'.join(lst[index_search_name].split(';'))
-                    return new_lst_search
+def search_recipe(path):
+    name,format_file,path_catalog = bl_lower.input_(path)
+    if os.path.isfile(path_catalog):
+        file = open(path_catalog, 'r+')
+        file.seek(0)
+        lst = []
+        lst_name = []
+        for string in file:
+            lst.append(string[:-1])
+        if len(lst[0]) > 0:
+            for i in range(len(lst)):
+                index_name = lst[i].index(';')
+                name_recipe = lst[i][9:index_name]
+                lst_name.append(name_recipe)
+            recipe_search = GUI.name_recipe()
+            if recipe_search in lst_name:
+                for i, string in enumerate(lst_name):
+                    if recipe_search == string:
+                        index_search_name = i
+                        new_lst_search = ';\n'.join(lst[index_search_name].split(';'))
+                        print(new_lst_search)
+            else:
+                print(f'Рецепта {recipe_search} нет в каталоге {name}')
         else:
-            new_lst_search = f'Рецепта {recipe_search} нет в каталоге'
-            return new_lst_search,'',''
-    elif isinstance(names_recipes[0],str):
-        return names_recipes
+            print(f'Файл {name + format_file} пуст')
+    else:
+        print(f'Файл {name + format_file} не найден')
 #search_recipe
 #delete_recipe
 
