@@ -1,7 +1,8 @@
 #GUI - Ввод данных и Вывод сообщений на экран
 from datetime import datetime
-from bl_lower import checking_empty_str,checking_input, input_
-import os
+
+
+
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
@@ -49,6 +50,23 @@ def function_name(action):
     function = input(f'\nВыберите действие с {action} > ')
     function = checking_input(function,list_name_function)
     return function
+
+#Проверка ввода пустой строки
+def checking_empty_str(name):
+    while name == '':
+        name = input('Вы ничего не ввели, попробуйте снова > ')
+    return name
+
+#Проверка ввода первичных данных
+def checking_input(name,lst):
+    while name not in lst:
+        if name == 'quit':
+            quit()
+        elif name == '':
+            name = input('Вы ничего не ввели, попробуйте снова > ')
+        else:
+            name = input('Вы ввели неверный запрос, попробуйте снова > ')
+    return name
 
 #Печать списка
 def print_list(lst,action):
