@@ -72,3 +72,16 @@ def get_list_search_ingredient(search_ingredient):
     else:
         list_search_ingredient=search_ingredient
     return list_search_ingredient
+
+#Преобразование Списка составов в Матрицу ингредиентов
+def get_matrix_ingredient(lst_composition):
+    matrix_ingredient=[]
+    for i,line in enumerate(lst_composition):
+        if len(line)>1:
+            row = lst_composition[i].split(',')
+            for i in range(len(row)):
+                row[i]=row[i].strip()
+        else:
+            row=lst_composition[i]
+        matrix_ingredient.append(row)
+    return matrix_ingredient
