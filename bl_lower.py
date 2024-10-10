@@ -16,8 +16,3 @@ def checking_input(name,lst):
         else:
             name = input('Вы ввели неверный запрос, попробуйте снова > ')
     return name
-def print_list(lst,action):
-    print(f'Список {action}: ')
-    for elem in lst:
-        print(elem)
-    print()

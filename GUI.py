@@ -47,6 +47,16 @@ def function_name(action):
     function = checking_input(function,list_name_function)
     return function
 
+#Печать списка
+def print_list(lst,action):
+    print()
+    if lst != '':
+        print(f'Список {action}: ')
+        for elem in lst:
+            print(elem)
+    else:
+        print('Пуст')
+
 #Проверка ввода имени каталога и пути его создания:
 def name_new_catalog():
     name_catalog = input('\nВведи имя каталога > ')
