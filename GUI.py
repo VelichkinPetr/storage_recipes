@@ -141,3 +141,9 @@ def print_sort_list(list_name,list_column,list_sort):
             index = list_column.index(list_sort[i])
             name_recipe = list_name[index]
             print(name_recipe, '\t', list_sort[i])
+
+#Ввод ингредиентов для поиска рецепта
+def name_search_ingredient():
+    ingredient_name = input(f'\nВведи ингредиент для поиска > ')
+    ingredient_name = checking_empty_str(ingredient_name)
+    return ingredient_name
