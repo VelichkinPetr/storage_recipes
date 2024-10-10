@@ -40,35 +40,40 @@ def get_help(action):
               f'{bl_lower.yellow('help')} - вызов справки\n'
               f'{bl_lower.yellow('quit')} - завершение работы приложения'))
 
-#Создание диретории для хранения каталогов
+#Создание директории для хранения каталогов
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
-    if path_catalog == 'quit':
-        bl_upper.quit_program()
-    path_catalog = checking_empty_str(path_catalog)
     while not os.path.isdir(path_catalog):
-        path_catalog = input(bl_lower.red('Такой директории не существет, попробуйте снова > '))
+        if path_catalog == 'quit':
+            bl_upper.quit_program()
+        elif path_catalog == '':
+            path_catalog = checking_empty_str(path_catalog)
+        else:
+            path_catalog = input(bl_lower.red('Такой директории не существует, попробуйте снова > '))
     dir_name = r'\storage_recipe'
     path_dir = path_catalog+dir_name
     return path_dir
 
-#Проверка ввода имени объекта взаимодействия
+
+#Ввод и проверка имени объекта взаимодействия
 def action_name():
     action = input(f'\nС чем хотите работать({bl_lower.yellow('catalog, recipe')}) > ')
     action = checking_input(action,list_name_action)
     return action
 
-#Проверка ввода имени функции
+#Ввод и проверка имени функции
 def function_name(action):
     function = input(f'\nВыберите действие с {bl_lower.yellow(action)} > ')
     function = checking_input(function,list_name_function)
     return function
 
+#Проверка ввода на пустую строку
 def checking_empty_str(name):
     while name == '':
         name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
     return name
 
+#Проверка ввода начальных данных или выход из программы
 def checking_input(name,lst):
     while name not in lst:
         if name == 'quit':
@@ -91,6 +96,7 @@ def name_new_catalog():
     name_catalog = checking_empty_str(name_catalog)
     return name_catalog
 
+#Ввод и проверка нового рецепта
 def new_recipe():
     string = []
     name = input('\nНазвание рецепта > ')
@@ -105,12 +111,13 @@ def new_recipe():
     description = checking_empty_str(description)
     string.append('Описание:'+description)
 
-    time = input('Время приготовления > ')
+    time = input('Время приготовления[мин] > ')
     time = checking_empty_str(time)
-    string.append('Время приготовления:'+time)
-    string.append('Время создания:'+str(datetime.now()))
+    string.append('Время приготовления[мин]:'+time)
+    string.append(f'Время создания:{datetime.now()}')
     return string
 
+#Ввод и проверка имени рецепта для поиска
 def name_recipe():
     recipe_name=input(f'\nВведи имя рецепта > ')
     recipe_name = checking_empty_str(recipe_name)
