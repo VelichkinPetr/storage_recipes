@@ -1,7 +1,7 @@
 #GUI - Ввод данных и Вывод сообщений на экран
 from datetime import datetime
-from bl_lower import checking_empty_str,checking_input
-
+from bl_lower import checking_empty_str,checking_input, input_
+import os
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
@@ -87,5 +87,19 @@ def new_recipe():
     string.append('Время создания:'+str(datetime.now()))
     return string
 
-
+def get_lst_file(path):
+    name, format_file, path_catalog = input_(path)
+    if os.path.isfile(path_catalog):
+        file = open(path_catalog, 'r+')
+        file.seek(0)
+        lst = []
+        for string in file:
+            lst.append(string[:-1])
+        file.close()
+        if len(lst[0]) == 0:
+            lst = f'Файл {name + format_file} пуст'
+            file.close()
+    else:
+        lst=f'Файл {name + format_file} не найден'
+    return lst
 
