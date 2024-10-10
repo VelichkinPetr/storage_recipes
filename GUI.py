@@ -7,7 +7,9 @@ import bl_upper
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
-list_name_function = ['create','list','search','delete','read','append','help','back']
+list_name_function = ['create','list','search','ingred','delete','sort','read','append','help','catalog','recipe']
+#список значений для сортировки
+list_sort = ['1','2']
 
 #Общая информация для пользователя
 def info():
