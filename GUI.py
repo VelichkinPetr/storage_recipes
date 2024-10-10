@@ -1,7 +1,13 @@
 #GUI - Ввод данных и Вывод сообщений на экран
 
-#Общая информация для пользователя
+#имена всех вариантов данных с которыми может работать пользователь
+list_name_action = ['catalog','recipe']
+#список имен всех возможных функций
+list_name_function = ['create','list','search','delete','read','append','help','back']
+#список всех возможных форматов
+list_format=['.txt','.rtf','.doc','.docx']
 
+#Общая информация для пользователя
 def info():
     return print('Добро пожаловать!\n'
       'Это консольное приложение для хранения и работы с кулинарными рецептами.\n'
@@ -39,8 +45,6 @@ def path_dir_catalog():
     path_dir=path_catalog+dir_name
     return path_dir
 
-#Импорт списков констант
-from bl_lower import list_name_function, list_name_action, list_format
 #Проверка ввода имени объекта взаимодействия
 def action_name():
     action = input('С чем хотите работать(catalog, recipe) > ')
