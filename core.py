@@ -4,13 +4,13 @@ import bl_lower
 import GUI
 
 def core():
-    GUI.info()
+    GUI.info()#начальная инфорация
 
     path = GUI.path_dir_catalog()
-    bl_upper.create_catalog_dir(path)
+    bl_upper.create_catalog_dir(path)#создание директории для каталогов
 
     action = GUI.action_name()
-    GUI.get_help(action)
+    GUI.get_help(action)#вывод функций для выбранного обьекта работы
 
     function = GUI.function_name(action)
     while action != 'end':
@@ -21,17 +21,17 @@ def core():
                 function = GUI.function_name(action)
             else:
                 if function == 'quit':
-                    quit()
+                    bl_upper.quit_program()
                 elif function == 'help':
                     GUI.get_help(action)
                 elif function == 'create':
                     bl_upper.create_catalog(path)
                 elif function == 'list':
-                    bl_upper.get_catalog_list(path,action)
+                    bl_upper.get_catalog_list(path)
                 elif function == 'search':
                     bl_upper.search_catalog(path)
                 elif function == 'delete':
-                   bl_upper.delete_catalog(path)
+                    bl_upper.delete_catalog(path)
                 function = GUI.function_name(action)
         elif action == 'recipe':
             if function == 'back':

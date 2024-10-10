@@ -20,10 +20,16 @@ def create_catalog(path):
         new_catalog = open(path_catalog,'w')
         print('Файл успешно создан!')
 
-def get_catalog_list(path,action):
-    list_catalog = os.listdir(path)
-    GUI.print_list(list_catalog,action)
-    return list_catalog
+def get_catalog_list(path):
+    list_dir = os.listdir(path)
+    list_len_and_date = bl_lower.get_len_and_date_file(path,list_dir)
+    if len(list_len_and_date)!=0:
+        list_catalog = []
+        for i in range(len(list_dir)):
+            list_catalog.append(list_dir[i] + list_len_and_date[i])
+        GUI.print_list(list_catalog)
+    else:
+        print(f'Каталогов нет!')
 
 def search_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
