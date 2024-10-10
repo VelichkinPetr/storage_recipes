@@ -27,13 +27,6 @@ def get_help(action):
               'search - найти рецепт по его наименованию\n'
               'read - вывод всех рецептов в каталоге\n'
               'delete - удалить рецепт.')
-
-#Проверка ввода имени каталога и пути его создания:
-def name_new_catalog():
-    name_catalog = input('\nВведи имя каталога > ')
-    name_catalog = checking_empty_str(name_catalog)
-    return name_catalog
-
 #Создания папки, в которой будут храниться каталоги
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
@@ -53,4 +46,13 @@ def function_name(action):
     function = input(f'\nВыберите действие с {action} > ')
     function = checking_input(function,list_name_function)
     return function
+
+#Проверка ввода имени каталога и пути его создания:
+def name_new_catalog():
+    name_catalog = input('\nВведи имя каталога > ')
+    name_catalog = checking_empty_str(name_catalog)
+    return name_catalog
+
+
+
 
