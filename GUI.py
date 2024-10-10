@@ -1,5 +1,7 @@
 #GUI - Ввод данных и Вывод сообщений на экран
+from datetime import datetime
 from bl_lower import checking_empty_str,checking_input
+
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
@@ -27,6 +29,7 @@ def get_help(action):
               'search - найти рецепт по его наименованию\n'
               'read - вывод всех рецептов в каталоге\n'
               'delete - удалить рецепт.')
+
 #Создания папки, в которой будут храниться каталоги
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
@@ -63,6 +66,26 @@ def name_new_catalog():
     name_catalog = checking_empty_str(name_catalog)
     return name_catalog
 
+#Запрос нового рецепта
+def new_recipe():
+    string = []
+    name = input('\nНазвание рецепта > ')
+    name = checking_empty_str(name)
+    string.append('Название:'+name)
+
+    composition = input('Состав > ')
+    composition = checking_empty_str(composition)
+    string.append('Состав:'+composition)
+
+    description = input('Описание > ')
+    description = checking_empty_str(description)
+    string.append('Описание:'+description)
+
+    time = input('Время приготовления > ')
+    time = checking_empty_str(time)
+    string.append('Время приготовления:'+time)
+    string.append('Время создания:'+str(datetime.now()))
+    return string
 
 
 
