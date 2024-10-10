@@ -110,4 +110,14 @@ def name_recipe():
     recipe_name = checking_empty_str(recipe_name)
     return recipe_name
 
-
+#Ввод и проверка
+def get_index_sort():
+    print(f'Для сортировки по Времени приготовления,    введите {bl_lower.yellow('1')}\n'
+          f'               по Времени создания рецепта, введите {bl_lower.yellow('2')}')
+    name_sort=input(f'\nСортировка по > ')
+    name_sort = checking_input(name_sort,list_sort)
+    if name_sort == '1':
+        name_sort = 3
+    elif name_sort == '2':
+        name_sort = 4
+    return name_sort
