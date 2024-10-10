@@ -89,6 +89,19 @@ def search_recipe(names_recipes):
         else:
             print(f'Рецепта {recipe_search} нет в каталоге')
 
-
+def delete_recipe(names_recipes):
+    if names_recipes != None:
+            lst_name,lst,path_catalog = names_recipes
+            recipe_search = GUI.name_recipe()
+            if recipe_search in lst_name:
+                for i, string in enumerate(lst_name):
+                    if recipe_search == string:
+                        index_search_name = i
+                        del lst[index_search_name]
+                        file=open(path_catalog,'w')
+                        file.writelines('\n'.join(lst))
+                        print(f'Рецепт успешно удален!')
+            else:
+                print(f'Рецепта {recipe_search} нет в каталоге')
 
 
