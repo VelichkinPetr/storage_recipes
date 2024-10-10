@@ -28,7 +28,7 @@ def core():
                 elif function == 'list':
                     bl_upper.get_catalog_list(path,action)
                 elif function == 'search':
-                    print()
+                    bl_upper.search_catalog(path)
                 elif function == 'delete':
                    print()
                 function = GUI.function_name(action)
