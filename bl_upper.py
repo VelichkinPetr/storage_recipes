@@ -66,7 +66,23 @@ def get_names_recipes(lst_file):
         return lst_name,lst
     elif isinstance(lst_file,str):
         return lst_file,''
-#append_recipe
+
+def search_recipe(names_recipes):
+    if isinstance(names_recipes[0], list):
+        lst=names_recipes[1]
+        lst_name = names_recipes[0]
+        recipe_search = GUI.name_recipe()
+        if recipe_search in lst_name:
+            for i, string in enumerate(lst_name):
+                if recipe_search == string:
+                    index_search_name = i
+                    new_lst_search = ';\n'.join(lst[index_search_name].split(';'))
+                    return new_lst_search
+        else:
+            new_lst_search = f'Рецепта {recipe_search} нет в каталоге'
+            return new_lst_search,'',''
+    elif isinstance(names_recipes[0],str):
+        return names_recipes
 #search_recipe
 #delete_recipe
 
