@@ -1,5 +1,5 @@
 #GUI - Ввод данных и Вывод сообщений на экран
-from bl_lower import checking_empty_str
+from bl_lower import checking_empty_str,checking_input
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
@@ -44,25 +44,13 @@ def path_dir_catalog():
 
 #Проверка ввода имени объекта взаимодействия
 def action_name():
-    action = input('С чем хотите работать(catalog, recipe) > ')
-    while action not in list_name_action:
-        if action == 'quit':
-            quit()
-        elif action == '':
-            action = input('Вы ничего не ввели, попробуйте снова a > ')
-        else:
-            action = input('Вы ввели неверный запрос, попробуйте снова a > ')
+    action = input('\nС чем хотите работать(catalog, recipe) > ')
+    action = checking_input(action,list_name_action)
     return action
 
 #Проверка ввода имени функции
 def function_name(action):
-    function = input(f'Выберите действие с {action} > ')
-    while function not in list_name_function:
-        if function == 'quit':
-            quit()
-        elif function == '':
-            function = input('Вы ничего не ввели, попробуйте снова f > ')
-        else:
-            function = input('Вы ввели неверный запрос, попробуйте снова f > ')
+    function = input(f'\nВыберите действие с {action} > ')
+    function = checking_input(function,list_name_function)
     return function
 
