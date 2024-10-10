@@ -118,4 +118,23 @@ def delete_recipe(names_recipes):
             else:
                 print(bl_lower.red(f'Рецепта {recipe_search} нет в каталоге'))
 
+#Сортировка по Времени приготовления и создания
+def sorting_file_by_column(check_error):
+    if isinstance(check_error,str):
+        path_catalog = check_error
+        file = open(path_catalog, 'r+')
+        file.seek(0)
 
+        lst = []
+        for string in file:
+            lst.append(string[:-1])
+        file.close()
+
+        index_column = GUI.get_index_sort()
+        lst_name = bl_lower.get_list_column(lst,0)
+        lst_column=bl_lower.get_list_column(lst,index_column)
+
+        sort_up_or_down=GUI.get_sort_up_or_down()
+        lst_sort = sorted(lst_column,reverse=sort_up_or_down)
+
+        GUI.print_sort_list(lst_name,lst_column,lst_sort)

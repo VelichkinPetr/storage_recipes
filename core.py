@@ -47,6 +47,8 @@ def core():
                     bl_upper.append_recipe(path)
                 elif function == 'read':
                     bl_upper.get_names_recipes(bl_lower.check_error_isfile(path))
+                elif function == 'sort':
+                    bl_upper.sorting_file_by_column( bl_lower.check_error_isfile(path) )
                 elif function == 'search':
                     bl_upper.search_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
                 elif function == 'delete':
