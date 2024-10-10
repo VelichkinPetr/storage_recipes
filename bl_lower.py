@@ -37,3 +37,16 @@ def get_len_and_date_file(path,lst):
             date_catalog = datetime.datetime.fromtimestamp(os.path.getctime(path + r'\\' + catalog))
             list_len_and_date.append(f' Рецептов:{len_catalog}, Дата создания:{date_catalog}')
     return list_len_and_date
+
+#Цветовая окраска выводимых сообщений
+def blue(text):
+    return f'\033[34m{text}'
+
+def red(text):
+    return f'\033[31m{text}\033[34m'
+
+def yellow(text):
+    return f'\033[33m{text}\033[34m'
+
+def green(text):
+    return f'\033[32m{text}\033[34m'
