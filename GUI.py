@@ -1,5 +1,5 @@
 #GUI - Ввод данных и Вывод сообщений на экран
-
+from bl_lower import checking_empty_str
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
@@ -30,17 +30,16 @@ def get_help(action):
 
 #Проверка ввода имени каталога и пути его создания:
 def name_new_catalog():
-    name_catalog=input('Введи имя каталога > ')
-    while name_catalog=='':
-        name_catalog = input('Вы ничего не ввели, попробуйте снова catalog > ')
+    name_catalog = input('\nВведи имя каталога > ')
+    name_catalog = checking_empty_str(name_catalog)
     return name_catalog
 
+#Создания папки, в которой будут храниться каталоги
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
-    while path_catalog == '':
-        path_catalog = input('Вы ничего не ввели, попробуйте снова path > ')
+    path_catalog = checking_empty_str(path_catalog)
     dir_name = r'\storage_recipe'
-    path_dir=path_catalog+dir_name
+    path_dir = path_catalog+dir_name
     return path_dir
 
 #Проверка ввода имени объекта взаимодействия
