@@ -16,3 +16,10 @@ def checking_input(name,lst):
         else:
             name = input('Вы ввели неверный запрос, попробуйте снова > ')
     return name
+
+#Ввод данных для получения пути к каталогу
+def input_(path):
+    name = GUI.name_new_catalog()
+    format_file = '.txt'
+    path_catalog = path + '\\' + name + format_file
+    return name,format_file,path_catalog
