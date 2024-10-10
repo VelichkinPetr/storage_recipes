@@ -48,7 +48,7 @@ def core():
                 elif function == 'read':
                     bl_upper.get_names_recipes(bl_lower.check_error_isfile(path))
                 elif function == 'search':
-                    bl_upper.search_recipe(path)
+                    bl_upper.search_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
                 elif function == 'delete':
                     print()
                 function = GUI.function_name(action)
