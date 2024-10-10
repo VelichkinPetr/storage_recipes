@@ -87,6 +87,11 @@ def new_recipe():
     string.append('Время создания:'+str(datetime.now()))
     return string
 
+#Запрос названия рецепта, для поиска
+def name_recipe():
+    recipe_name=input(f'\nВведи имя рецепта > ')
+    recipe_name = checking_empty_str(recipe_name)
+    return recipe_name
 def get_lst_file(path):
     name, format_file, path_catalog = input_(path)
     if os.path.isfile(path_catalog):
