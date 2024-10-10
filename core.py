@@ -40,7 +40,7 @@ def core():
                 function = GUI.function_name(action)
             else:
                 if function == 'quit':
-                    quit()
+                    bl_upper.quit_program()
                 elif function == 'help':
                     GUI.get_help(action)
                 elif function == 'append':

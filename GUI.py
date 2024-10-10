@@ -1,8 +1,8 @@
 #GUI - Ввод данных и Вывод сообщений на экран
 import os.path
 from datetime import datetime
+import bl_lower
 import bl_upper
-
 
 #имена всех вариантов данных с которыми может работать пользователь
 list_name_action = ['catalog','recipe']
@@ -11,66 +11,64 @@ list_name_function = ['create','list','search','delete','read','append','help','
 
 #Общая информация для пользователя
 def info():
-    return print('Добро пожаловать!\n'
-      'Это консольное приложение для хранения и работы с кулинарными рецептами.\n'
-      'Для вызова справки, введите \'help\'\n'
-      'Для возврата к выбору, введите \'back\'\n'
-      'Для выхода из приложения, введите \'quit\'\n')
+    print(bl_lower.blue(f'Добро пожаловать!\n'
+                        f'Это консольное приложение для хранения и работы с кулинарными рецептами.\n'
+                        f'Для вызова справки, введите \'{bl_lower.yellow('help')}\'\n'
+                        f'Для возврата к выбору, введите \'{bl_lower.yellow('back')}\'\n'
+                        f'Для выхода из приложения, введите \'{bl_lower.yellow('quit')}\'\n'))
 
 #Подсказка для пользователя о функция доступных с конкретными данными
 def get_help(action):
     if action == 'catalog':
-        print('\nДоступные функции для работы с Каталогом:\n'
-              'create - создать каталог\n'
-              'list - получить список всех каталогов\n'
-              'search - найти каталог по его названию\n'
-              'delete - удалить каталог.')
+        print(bl_lower.blue('\nДоступные функции для работы с Каталогом:\n'
+              f'{bl_lower.yellow('create')} - создать каталог\n'
+              f'{bl_lower.yellow('list')} - получить список всех каталогов\n'
+              f'{bl_lower.yellow('search')} - найти каталог по его названию\n'
+              f'{bl_lower.yellow('delete')} - удалить каталог.'))
     elif action == 'recipe':
-        print('\nДоступные функции для работы с Рецептами:\n'
-              'append - добавление рецепта\n'
-              'search - найти рецепт по его наименованию\n'
-              'read - вывод всех рецептов в каталоге\n'
-              'delete - удалить рецепт.')
+        print(bl_lower.blue('\nДоступные функции для работы с Рецептами:\n'
+              f'{bl_lower.yellow('append')} - добавление рецепта\n'
+              f'{bl_lower.yellow('search')} - найти рецепт по его наименованию\n'
+              f'{bl_lower.yellow('read')} - вывод всех рецептов в каталоге\n'
+              f'{bl_lower.yellow('delete')} - удалить рецепт.'))
 
-#Создания папки, в которой будут храниться каталоги
+#Создание диретории для хранения каталогов
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
     if path_catalog == 'quit':
         bl_upper.quit_program()
     path_catalog = checking_empty_str(path_catalog)
     while not os.path.isdir(path_catalog):
-        path_catalog = input('Такой директории не существет, попробуйте снова > ')
+        path_catalog = input(bl_lower.red('Такой директории не существет, попробуйте снова > '))
     dir_name = r'\storage_recipe'
     path_dir = path_catalog+dir_name
     return path_dir
 
 #Проверка ввода имени объекта взаимодействия
 def action_name():
-    action = input('\nС чем хотите работать(catalog, recipe) > ')
+    action = input(f'\nС чем хотите работать({bl_lower.yellow('catalog, recipe')}) > ')
     action = checking_input(action,list_name_action)
     return action
 
 #Проверка ввода имени функции
 def function_name(action):
-    function = input(f'\nВыберите действие с {action} > ')
+    function = input(f'\nВыберите действие с {bl_lower.yellow(action)} > ')
     function = checking_input(function,list_name_function)
     return function
 
-#Проверка ввода пустой строки
 def checking_empty_str(name):
     while name == '':
-        name = input('Вы ничего не ввели, попробуйте снова > ')
+        name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
     return name
 
-#Проверка ввода первичных данных
 def checking_input(name,lst):
     while name not in lst:
         if name == 'quit':
-            quit()
+            bl_upper.quit_program()
         elif name == '':
-            name = input('Вы ничего не ввели, попробуйте снова > ')
+            name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
         else:
-            name = input('Вы ввели неверный запрос, попробуйте снова > ')
+            name = input(bl_lower.red('Вы ввели неверный запрос, попробуйте снова > '))
     return name
 
 #Печать списка
@@ -85,7 +83,6 @@ def name_new_catalog():
     name_catalog = checking_empty_str(name_catalog)
     return name_catalog
 
-#Запрос нового рецепта
 def new_recipe():
     string = []
     name = input('\nНазвание рецепта > ')
@@ -106,7 +103,6 @@ def new_recipe():
     string.append('Время создания:'+str(datetime.now()))
     return string
 
-#Запрос названия рецепта, для поиска
 def name_recipe():
     recipe_name=input(f'\nВведи имя рецепта > ')
     recipe_name = checking_empty_str(recipe_name)

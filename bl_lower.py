@@ -3,7 +3,7 @@ import GUI
 import os
 import datetime
 
-#Ввод данных для получения пути к каталогу
+#Ввод начальных данных
 def input_(path):
     name = GUI.name_new_catalog()
     format_file = '.txt'
@@ -20,9 +20,9 @@ def check_error_isfile(path):
             file.close()
             return path_catalog
         else:
-            print(f'Файл {name + format_file} пуст')
+            print(red(f'Файл {name + format_file} пуст'))
     else:
-        print(f'Файл {name + format_file} не найден')
+        print(red(f'Файл {name + format_file} не найден'))
 
 #Генерация списка количества рецептов в файле и даты его создания
 def get_len_and_date_file(path,lst):
