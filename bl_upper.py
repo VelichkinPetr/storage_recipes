@@ -8,6 +8,9 @@ def create_catalog_dir(path):
     if not os.path.isdir(path):
         return os.mkdir(path+'\\')
 
+def quit_program():
+    print('Пока!')
+    quit()
 #Функции работы с каталогами
 def create_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
