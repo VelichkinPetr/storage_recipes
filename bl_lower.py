@@ -64,3 +64,11 @@ def yellow(text):
 
 def green(text):
     return f'\033[32m{text}\033[34m'
+
+#Преобразование искомого(ых) ингредиента(ов) в список
+def get_list_search_ingredient(search_ingredient):
+    if len(search_ingredient)>1:
+        list_search_ingredient = search_ingredient.replace(' ','').split(',')
+    else:
+        list_search_ingredient=search_ingredient
+    return list_search_ingredient
