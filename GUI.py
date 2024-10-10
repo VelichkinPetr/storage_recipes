@@ -74,14 +74,10 @@ def checking_input(name,lst):
     return name
 
 #Печать списка
-def print_list(lst,action):
+def print_list(lst):
     print()
-    if lst != '':
-        print(f'Список {action}: ')
-        for elem in lst:
-            print(elem)
-    else:
-        print('Пуст')
+    for elem in lst:
+        print(elem)
 
 #Проверка ввода имени каталога и пути его создания:
 def name_new_catalog():
