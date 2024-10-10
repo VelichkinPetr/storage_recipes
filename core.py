@@ -4,19 +4,19 @@ import bl_lower
 import GUI
 
 def core():
-    GUI.info()#начальная инфорация
+    GUI.info()#начальная информация
 
     path = GUI.path_dir_catalog()
     bl_upper.create_catalog_dir(path)#создание директории для каталогов
 
     action = GUI.action_name()
-    GUI.get_help(action)#вывод функций для выбранного обьекта работы
+    GUI.get_help(action)#вывод функций для выбранного объекта работы
 
     function = GUI.function_name(action)
-    while action != 'end':
+    while True:
         if action == 'catalog':
-            if function == 'back':
-                action = GUI.action_name()
+            if function == 'recipe':
+                action = function
                 GUI.get_help(action)
                 function = GUI.function_name(action)
             else:
@@ -34,8 +34,8 @@ def core():
                     bl_upper.delete_catalog(path)
                 function = GUI.function_name(action)
         elif action == 'recipe':
-            if function == 'back':
-                action = GUI.action_name()
+            if function == 'catalog':
+                action = function
                 GUI.get_help(action)
                 function = GUI.function_name(action)
             else:
@@ -46,14 +46,14 @@ def core():
                 elif function == 'append':
                     bl_upper.append_recipe(path)
                 elif function == 'read':
-                    bl_upper.get_names_recipes(bl_lower.check_error_isfile(path))
+                    bl_upper.get_names_recipes( bl_lower.check_error_isfile(path) )
                 elif function == 'sort':
-                    bl_upper.sorting_file_by_column(bl_lower.check_error_isfile(path))
+                    bl_upper.sorting_file_by_column( bl_lower.check_error_isfile(path) )
                 elif function == 'search':
-                    bl_upper.search_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
+                    bl_upper.search_recipe( bl_upper.get_names_recipes( bl_lower.check_error_isfile(path) ) )
                 elif function == 'ingred':
-                    bl_upper.search_recipe_ingredient(bl_lower.check_error_isfile(path))
+                    bl_upper.search_recipe_ingredient( bl_lower.check_error_isfile(path) )
                 elif function == 'delete':
-                    bl_upper.delete_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
+                    bl_upper.delete_recipe( bl_upper.get_names_recipes( bl_lower.check_error_isfile(path) ) )
                 function = GUI.function_name(action)
 
