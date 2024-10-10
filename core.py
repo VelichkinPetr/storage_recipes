@@ -30,7 +30,7 @@ def core():
                 elif function == 'search':
                     bl_upper.search_catalog(path)
                 elif function == 'delete':
-                   print()
+                   bl_upper.delete_catalog(path)
                 function = GUI.function_name(action)
         elif action == 'recipe':
             if function == 'back':

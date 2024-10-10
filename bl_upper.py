@@ -28,7 +28,14 @@ def search_catalog(path):
         print(f'Файл {name+format_file} найден')
     else:
         print(f'Файл {name+format_file} не найден')
-#delete_catalog
+
+def delete_catalog(path):
+    name,format_file,path_catalog = bl_lower.input_(path)
+    if os.path.isfile(path_catalog):
+        os.remove(path)
+        print(f'Файл успешно удален!')
+    else:
+        print(f'Файл {name + format_file} не найден')
 #recipes_in_catalog
 
 #Функции работы с рецептами
