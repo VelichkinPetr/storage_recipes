@@ -55,17 +55,25 @@ def append_recipe(path):
     else:
         print(f'Файл {name + format_file} не найден')
 
-def get_names_recipes(lst_file):
-    if isinstance(lst_file,list):
-        lst = lst_file
-        lst_name=[]
-        for i in range(len(lst)):
-            index_name = lst[i].index(';')
-            name_recipe = lst[i][9:index_name]
-            lst_name.append(name_recipe)
-        return lst_name,lst
-    elif isinstance(lst_file,str):
-        return lst_file,''
+def get_names_recipes(path):
+    name,format_file,path_catalog = bl_lower.input_(path)
+    if os.path.isfile(path_catalog):
+        file = open(path_catalog, 'r+')
+        file.seek(0)
+        lst = []
+        lst_name = []
+        for string in file:
+            lst.append(string[:-1])
+        if len(lst[0])>0:
+            for i in range(len(lst)):
+                index_name = lst[i].index(';')
+                name_recipe = lst[i][9:index_name]
+                lst_name.append(name_recipe)
+            GUI.print_list(lst_name,name)
+        else:
+            print(f'Файл {name + format_file} пуст')
+    else:
+        print(f'Файл {name + format_file} не найден')
 
 def search_recipe(names_recipes):
     if isinstance(names_recipes[0], list):
