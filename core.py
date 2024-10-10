@@ -1,5 +1,6 @@
 #бесконечный цикл работы приложения, в котором мы спрашиваем у пользователя, что он хочет сделать и хочет ли вообще дальше работать
 import bl_upper
+import bl_lower
 import GUI
 
 def core():
@@ -45,7 +46,7 @@ def core():
                 elif function == 'append':
                     bl_upper.append_recipe(path)
                 elif function == 'read':
-                    bl_upper.get_names_recipes(path)
+                    bl_upper.get_names_recipes(bl_lower.check_error_isfile(path))
                 elif function == 'search':
                     bl_upper.search_recipe(path)
                 elif function == 'delete':
