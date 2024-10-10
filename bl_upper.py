@@ -1,27 +1,17 @@
 #bl_upper - функции самого приложения
 import os
-import core
-
-
+import GUI
+import bl_lower
 
 #Функции работы с каталогами
-def create_catalog(action):
-    import GUI
-    path_dir=core.path
-    name = GUI.name_new_catalog()
-    format_file = '.txt'
-
-    if not os.path.isdir(path_dir):
-        os.mkdir(path_dir+'\\')
-    path_new_dir=path_dir+'\\'
-
-    path_catalog=path_new_dir+name+format_file
+def create_catalog(path):
+    name,format_file,path_catalog = bl_lower.input_(path)
     if os.path.isfile(path_catalog):
         print('Такой файл уже существует')
     else:
-        new_catalog=open(path_catalog,'w')
+        new_catalog = open(path_catalog,'w')
         print('Файл успешно создан!')
-    return path_catalog
+
 def get_catalog_list(path,action):
     list_catalog = os.listdir(path)
     GUI.print_list(list_catalog,action)
