@@ -9,7 +9,7 @@ def create_catalog(action):
     import GUI
     path_dir=core.path
     name = GUI.name_new_catalog()
-    format_file = GUI.format_catalog()
+    format_file = '.txt'
 
     if not os.path.isdir(path_dir):
         os.mkdir(path_dir+'\\')

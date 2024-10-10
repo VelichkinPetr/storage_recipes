@@ -4,8 +4,7 @@
 list_name_action = ['catalog','recipe']
 #список имен всех возможных функций
 list_name_function = ['create','list','search','delete','read','append','help','back']
-#список всех возможных форматов
-list_format=['.txt','.rtf','.doc','.docx']
+
 
 #Общая информация для пользователя
 def info():
@@ -69,12 +68,3 @@ def function_name(action):
             function = input('Вы ввели неверный запрос, попробуйте снова f > ')
     return function
 
-#Проверка ввода формата каталога
-def format_catalog():
-    format_catalog = input('Введи расширение каталога > ')
-    while format_catalog not in list_format:
-        if format_catalog == '':
-            format_catalog = input('Вы ничего не ввели, попробуйте снова format > ')
-        else:
-            format_catalog = input('Вы ввели неверный запрос, попробуйте снова format > ')
-    return format_catalog
