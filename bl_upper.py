@@ -138,3 +138,34 @@ def sorting_file_by_column(check_error):
         lst_sort = sorted(lst_column,reverse=sort_up_or_down)
 
         GUI.print_sort_list(lst_name,lst_column,lst_sort)
+
+#Поиск рецепта по ингредиентам
+def search_recipe_ingredient(check_error):
+    if isinstance(check_error,str):
+        path_catalog = check_error
+        file = open(path_catalog, 'r+')
+        file.seek(0)
+
+        lst = []
+        for string in file:
+            lst.append(string[:-1])
+
+        search_ingredient = GUI.name_search_ingredient()
+        lst_composition = bl_lower.get_list_column(lst, 1)
+
+        # Создание списка рецептов с искомыми ингредиентами
+        list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
+        matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
+        list_recipe = []
+        for search in list_search_ingredient:
+            for i in range(len(matrix_ingredient)):
+                for j in range(len(matrix_ingredient[i])):
+                    if search in matrix_ingredient[i][j] and lst[i] not in list_recipe:
+                        list_recipe.append(lst[i])
+        if list_recipe != []:
+            file.close()
+            GUI.print_list(list_recipe)
+        else:
+            file.close()
+            print(bl_lower.red(f'Ингредиентов \'{search_ingredient}\' нет в каталоге'))
+

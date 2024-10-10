@@ -48,10 +48,12 @@ def core():
                 elif function == 'read':
                     bl_upper.get_names_recipes(bl_lower.check_error_isfile(path))
                 elif function == 'sort':
-                    bl_upper.sorting_file_by_column( bl_lower.check_error_isfile(path) )
+                    bl_upper.sorting_file_by_column(bl_lower.check_error_isfile(path))
                 elif function == 'search':
                     bl_upper.search_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
+                elif function == 'ingred':
+                    bl_upper.search_recipe_ingredient(bl_lower.check_error_isfile(path))
                 elif function == 'delete':
-                    bl_upper.delete_recipe( bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)) )
+                    bl_upper.delete_recipe(bl_upper.get_names_recipes(bl_lower.check_error_isfile(path)))
                 function = GUI.function_name(action)
 
