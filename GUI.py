@@ -1,6 +1,7 @@
 #GUI - Ввод данных и Вывод сообщений на экран
+import os.path
 from datetime import datetime
-
+import bl_upper
 
 
 #имена всех вариантов данных с которыми может работать пользователь
@@ -34,7 +35,11 @@ def get_help(action):
 #Создания папки, в которой будут храниться каталоги
 def path_dir_catalog():
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
+    if path_catalog == 'quit':
+        bl_upper.quit_program()
     path_catalog = checking_empty_str(path_catalog)
+    while not os.path.isdir(path_catalog):
+        path_catalog = input('Такой директории не существет, попробуйте снова > ')
     dir_name = r'\storage_recipe'
     path_dir = path_catalog+dir_name
     return path_dir
