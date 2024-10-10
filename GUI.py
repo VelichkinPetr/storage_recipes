@@ -133,3 +133,11 @@ def get_sort_up_or_down():
     elif name_sort == '2':
         name_sort = True
     return name_sort
+
+#Вывод сортированного списка
+def print_sort_list(list_name,list_column,list_sort):
+    for i in range(len(list_sort)):
+        if list_sort[i] in list_column:
+            index = list_column.index(list_sort[i])
+            name_recipe = list_name[index]
+            print(name_recipe, '\t', list_sort[i])
