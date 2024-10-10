@@ -15,24 +15,30 @@ list_sort = ['1','2']
 def info():
     print(bl_lower.blue(f'Добро пожаловать!\n'
                         f'Это консольное приложение для хранения и работы с кулинарными рецептами.\n'
-                        f'Для вызова справки, введите \'{bl_lower.yellow('help')}\'\n'
-                        f'Для возврата к выбору, введите \'{bl_lower.yellow('back')}\'\n'
-                        f'Для выхода из приложения, введите \'{bl_lower.yellow('quit')}\'\n'))
+                        f'Для завершения работы приложения, введите \'{bl_lower.yellow('quit')}\'\n'))
 
 #Подсказка для пользователя о функция доступных с конкретными данными
 def get_help(action):
     if action == 'catalog':
         print(bl_lower.blue('\nДоступные функции для работы с Каталогом:\n'
+              f'{bl_lower.yellow('recipe')} - перейти к работе с рецептами\n'
               f'{bl_lower.yellow('create')} - создать каталог\n'
               f'{bl_lower.yellow('list')} - получить список всех каталогов\n'
               f'{bl_lower.yellow('search')} - найти каталог по его названию\n'
-              f'{bl_lower.yellow('delete')} - удалить каталог.'))
+              f'{bl_lower.yellow('delete')} - удалить каталог\n'
+              f'{bl_lower.yellow('help')} - вызов справки\n'
+              f'{bl_lower.yellow('quit')} - завершение работы приложения'))
     elif action == 'recipe':
         print(bl_lower.blue('\nДоступные функции для работы с Рецептами:\n'
+              f'{bl_lower.yellow('catalog')} - перейти к работе с каталогами\n'
               f'{bl_lower.yellow('append')} - добавление рецепта\n'
               f'{bl_lower.yellow('search')} - найти рецепт по его наименованию\n'
+              f'{bl_lower.yellow('ingred')} - найти рецепт по его ингредиентам\n'
               f'{bl_lower.yellow('read')} - вывод всех рецептов в каталоге\n'
-              f'{bl_lower.yellow('delete')} - удалить рецепт.'))
+              f'{bl_lower.yellow('sort')} - вывод всех рецептов в каталоге\n'
+              f'{bl_lower.yellow('delete')} - удалить рецепт\n'
+              f'{bl_lower.yellow('help')} - вызов справки\n'
+              f'{bl_lower.yellow('quit')} - завершение работы приложения'))
 
 #Создание диретории для хранения каталогов
 def path_dir_catalog():
