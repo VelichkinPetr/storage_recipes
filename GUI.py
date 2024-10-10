@@ -92,19 +92,5 @@ def name_recipe():
     recipe_name=input(f'\nВведи имя рецепта > ')
     recipe_name = checking_empty_str(recipe_name)
     return recipe_name
-def get_lst_file(path):
-    name, format_file, path_catalog = input_(path)
-    if os.path.isfile(path_catalog):
-        file = open(path_catalog, 'r+')
-        file.seek(0)
-        lst = []
-        for string in file:
-            lst.append(string[:-1])
-        file.close()
-        if len(lst[0]) == 0:
-            lst = f'Файл {name + format_file} пуст'
-            file.close()
-    else:
-        lst=f'Файл {name + format_file} не найден'
-    return lst
+
 
