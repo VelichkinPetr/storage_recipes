@@ -121,3 +121,15 @@ def get_index_sort():
     elif name_sort == '2':
         name_sort = 4
     return name_sort
+
+#Выбор направления сортировки
+def get_sort_up_or_down():
+    print(f'Для сортировки по Возрастанию, введите {bl_lower.yellow('1')} \n'
+          f'               по Убыванию,    введите {bl_lower.yellow('2')} ')
+    name_sort = input(f'\nСортировка по > ')
+    name_sort = checking_input(name_sort, list_sort)
+    if name_sort == '1':
+        name_sort = False
+    elif name_sort == '2':
+        name_sort = True
+    return name_sort
