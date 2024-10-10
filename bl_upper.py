@@ -8,18 +8,23 @@ def create_catalog_dir(path):
     if not os.path.isdir(path):
         return os.mkdir(path+'\\')
 
+#Выход из программы
 def quit_program():
     print(bl_lower.green('Пока!'))
     quit()
+
 #Функции работы с каталогами
+#Создание каталога
 def create_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
     if os.path.isfile(path_catalog):
         print(bl_lower.yellow('Такой файл уже существует'))
     else:
         new_catalog = open(path_catalog,'w')
+        new_catalog.close()
         print(bl_lower.green('Файл успешно создан!'))
 
+#Получение списка каталогов
 def get_catalog_list(path):
     list_dir = os.listdir(path)
     list_len_and_date = bl_lower.get_len_and_date_file(path,list_dir)
@@ -31,6 +36,7 @@ def get_catalog_list(path):
     else:
         print(bl_lower.red(f'Каталогов нет!'))
 
+#Поиск каталога
 def search_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
     if os.path.isfile(path_catalog):
@@ -47,6 +53,7 @@ def delete_catalog(path):
         print(bl_lower.red(f'Файл {name + format_file} не найден'))
 
 #Функции работы с рецептами
+#Добавление рецептов в каталог
 def append_recipe(path):
     name,format_file,path_catalog = bl_lower.input_(path)
     if os.path.isfile(path_catalog):
@@ -64,23 +71,22 @@ def append_recipe(path):
     else:
         print(bl_lower.red(f'Файл {name + format_file} не найден'))
 
+#Получение списка рецептов в каталоге
 def get_names_recipes(check_error):
     if isinstance(check_error,str):
         path_catalog = check_error
         file = open(path_catalog, 'r+')
         file.seek(0)
         lst = []
-        lst_name = []
         for string in file:
             lst.append(string[:-1])
-        file.seek(0)
-        for i in range(len(lst)):
-            index_name = lst[i].index(';')
-            name_recipe = lst[i][9:index_name]
-            lst_name.append(name_recipe)
+        file.close()
+        index_column=0
+        lst_name=bl_lower.get_list_column(lst,index_column)
         GUI.print_list(lst_name)
         return lst_name,lst,path_catalog
 
+#Поиск рецепта
 def search_recipe(names_recipes):
     if names_recipes != None:
         lst_name,lst,path_catalog = names_recipes
@@ -95,6 +101,7 @@ def search_recipe(names_recipes):
         else:
             print(bl_lower.red(f'Рецепта {recipe_search} нет в каталоге'))
 
+#Удаление рецепта
 def delete_recipe(names_recipes):
     if names_recipes != None:
             lst_name,lst,path_catalog = names_recipes
@@ -106,6 +113,7 @@ def delete_recipe(names_recipes):
                         del lst[index_search_name]
                         file=open(path_catalog,'w')
                         file.writelines('\n'.join(lst))
+                        file.close()
                         print(bl_lower.green(f'Рецепт успешно удален!'))
             else:
                 print(bl_lower.red(f'Рецепта {recipe_search} нет в каталоге'))
