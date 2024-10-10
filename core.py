@@ -45,7 +45,7 @@ def core():
                 elif function == 'append':
                     bl_upper.append_recipe(path)
                 elif function == 'read':
-                    print()
+                    print(bl_upper.get_names_recipes(GUI.get_lst_file(path))[0])
                 elif function == 'search':
                     print()
                 elif function == 'delete':

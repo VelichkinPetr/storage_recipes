@@ -55,7 +55,17 @@ def append_recipe(path):
     else:
         print(f'Файл {name + format_file} не найден')
 
-
+def get_names_recipes(lst_file):
+    if isinstance(lst_file,list):
+        lst = lst_file
+        lst_name=[]
+        for i in range(len(lst)):
+            index_name = lst[i].index(';')
+            name_recipe = lst[i][9:index_name]
+            lst_name.append(name_recipe)
+        return lst_name,lst
+    elif isinstance(lst_file,str):
+        return lst_file,''
 #append_recipe
 #search_recipe
 #delete_recipe
