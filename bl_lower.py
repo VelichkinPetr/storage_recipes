@@ -1,6 +1,8 @@
 #bl_lower - функции вспомогательные для GUI и upper
 import GUI
 import os
+import datetime
+
 #Ввод данных для получения пути к каталогу
 def input_(path):
     name = GUI.name_new_catalog()
@@ -21,3 +23,17 @@ def check_error_isfile(path):
             print(f'Файл {name + format_file} пуст')
     else:
         print(f'Файл {name + format_file} не найден')
+
+#Генерация списка количества рецептов в файле и даты его создания
+def get_len_and_date_file(path,lst):
+    list_len_and_date = []
+    if len(lst) != 0:
+        for catalog in lst:
+            file = open(path + r'\\' + catalog, 'r')
+            len_catalog = 0
+            for line in file:
+                if 'Название' in line:
+                    len_catalog += 1
+            date_catalog = datetime.datetime.fromtimestamp(os.path.getctime(path + r'\\' + catalog))
+            list_len_and_date.append(f' Рецептов:{len_catalog}, Дата создания:{date_catalog}')
+    return list_len_and_date
