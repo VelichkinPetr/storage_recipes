@@ -3,6 +3,11 @@ import os
 import GUI
 import bl_lower
 
+#Создание директории для каталогов
+def create_catalog_dir(path):
+    if not os.path.isdir(path):
+        return os.mkdir(path+'\\')
+
 #Функции работы с каталогами
 def create_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
