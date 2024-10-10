@@ -35,7 +35,7 @@ def get_len_and_date_file(path,lst):
                 if 'Название' in line:
                     len_catalog += 1
             date_catalog = datetime.datetime.fromtimestamp(os.path.getctime(path + r'\\' + catalog))
-            list_len_and_date.append(f' Рецептов:{len_catalog}, Дата создания:{date_catalog}')
+            list_len_and_date.append(f'\tРецептов:{len_catalog},\tДата создания:{date_catalog}')
     return list_len_and_date
 
 #Получение списка столбцов из каталога
