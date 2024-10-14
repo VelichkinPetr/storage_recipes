@@ -66,7 +66,6 @@ def append_recipe(path):
                 file_object.write(app_recipe)
                 file_object.close()
             print(bl_lower.green(f'Рецепт успешно записан!'))
-    
 
 #Получение списка рецептов в каталоге
 def get_names_recipes(path_catalog):
@@ -111,19 +110,12 @@ def delete_recipe(names_recipes):
                 print(bl_lower.red(f'Рецепта {recipe_search} нет в каталоге'))
 
 #Сортировка по Времени приготовления и создания
-def sorting_file_by_column(check_error):
-    if isinstance(check_error,str):
-        path_catalog = check_error
-        file = open(path_catalog, 'r+')
-        file.seek(0)
-
-        lst = []
-        for string in file:
-            lst.append(string[:-1])
-        file.close()
+def sorting_file_by_column(path_catalog):
+    if isinstance(path_catalog, str):
+        lst = bl_lower.get_list_str_from_file(path_catalog)
+        lst_name = bl_lower.get_list_column(lst, 0)
 
         index_column = GUI.get_index_sort()
-        lst_name = bl_lower.get_list_column(lst,0)
         lst_column=bl_lower.get_list_column(lst,index_column)
 
         sort_up_or_down=GUI.get_sort_up_or_down()
@@ -132,32 +124,22 @@ def sorting_file_by_column(check_error):
         GUI.print_sort_list(lst_name,lst_column,lst_sort)
 
 #Поиск рецепта по ингредиентам
-def search_recipe_ingredient(check_error):
-    if isinstance(check_error,str):
-        path_catalog = check_error
-        file = open(path_catalog, 'r+')
-        file.seek(0)
+def search_recipe_ingredient(path_catalog):
+    if isinstance(path_catalog, str):
+        lst = bl_lower.get_list_str_from_file(path_catalog)
 
-        lst = []
-        for string in file:
-            lst.append(string[:-1])
+        lst_composition = bl_lower.get_list_column(lst, 1)
+        matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
 
         search_ingredient = GUI.name_search_ingredient()
-        lst_composition = bl_lower.get_list_column(lst, 1)
+        list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
 
         # Создание списка рецептов с искомыми ингредиентами
-        list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
-        matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
         list_recipe = []
         for search in list_search_ingredient:
             for i in range(len(matrix_ingredient)):
                 for j in range(len(matrix_ingredient[i])):
                     if search in matrix_ingredient[i][j] and lst[i] not in list_recipe:
                         list_recipe.append(lst[i])
-        if list_recipe != []:
-            file.close()
-            GUI.print_list(list_recipe)
-        else:
-            file.close()
-            print(bl_lower.red(f'Ингредиентов \'{search_ingredient}\' нет в каталоге'))
+        bl_lower.ingredient_in_catalog(list_recipe,search_ingredient)
 
