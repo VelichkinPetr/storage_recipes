@@ -34,6 +34,16 @@ def take_path_catalog(path):
         if not checking_file_is_empty(file,name,format_file):
             return path_catalog
 
+#Преобразование файла в список строк
+def get_list_str_from_file(path_catalog):
+    file = open(path_catalog, 'r+')
+    file.seek(0)
+    lst = []
+    for string in file:
+        lst.append(string[:-1])
+    file.close()
+    return lst
+
 #Генерация списка количества рецептов в файле и даты его создания
 def get_len_and_date_file(path,lst):
     list_len_and_date = []
