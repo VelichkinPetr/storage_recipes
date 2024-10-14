@@ -9,6 +9,10 @@ def input_(path):
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
     return name,format_file,path_catalog
+#Проверка существования файла
+def checking_file(name,format_file,path_catalog):
+    if not os.path.isfile(path_catalog):
+        print(red(f'Файл {name + format_file} не найден'))
 
 #Проверка существования файла и его содержимого
 def check_error_isfile(path):
