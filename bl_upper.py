@@ -39,24 +39,22 @@ def get_catalog_list(path):
 #Поиск каталога
 def search_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if os.path.isfile(path_catalog):
+    if bl_lower.checking_file(name,format_file,path_catalog):
         print(bl_lower.green(f'Файл {name+format_file} найден'))
-    else:
-        print(bl_lower.red(f'Файл {name+format_file} не найден'))
+
 
 def delete_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if os.path.isfile(path_catalog):
+    if bl_lower.checking_file(name,format_file,path_catalog):
         os.remove(path)
         print(bl_lower.green(f'Файл успешно удален!'))
-    else:
-        print(bl_lower.red(f'Файл {name + format_file} не найден'))
+
 
 #Функции работы с рецептами
 #Добавление рецептов в каталог
 def append_recipe(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if os.path.isfile(path_catalog):
+    if bl_lower.checking_file(name,format_file,path_catalog):
         app_recipe = ';'.join(GUI.new_recipe())
         with open(path_catalog,'a+') as file_object:
             file_object.seek(0)
@@ -68,19 +66,13 @@ def append_recipe(path):
                 file_object.write(app_recipe)
                 file_object.close()
             print(bl_lower.green(f'Рецепт успешно записан!'))
-    else:
-        print(bl_lower.red(f'Файл {name + format_file} не найден'))
+    
 
 #Получение списка рецептов в каталоге
-def get_names_recipes(check_error):
-    if isinstance(check_error,str):
-        path_catalog = check_error
-        file = open(path_catalog, 'r+')
-        file.seek(0)
-        lst = []
-        for string in file:
-            lst.append(string[:-1])
-        file.close()
+def get_names_recipes(path_catalog):
+    if isinstance(path_catalog,str):
+        lst = bl_lower.get_list_str_from_file(path_catalog)
+
         index_column=0
         lst_name=bl_lower.get_list_column(lst,index_column)
         GUI.print_list(lst_name)
