@@ -9,24 +9,30 @@ def input_(path):
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
     return name,format_file,path_catalog
+
 #Проверка существования файла
 def checking_file(name,format_file,path_catalog):
     if not os.path.isfile(path_catalog):
         print(red(f'Файл {name + format_file} не найден'))
+    else:
+        return True
+#Проверка, что файл пуст
+def checking_file_is_empty(file,name,format_file):
+    if len(file.read()) == 0:
+        file.close()
+        print(red(f'Файл {name + format_file} пуст'))
+        return True
+    else:
+        return False
 
-#Проверка существования файла и его содержимого
-def check_error_isfile(path):
+#Получене пути к каталогу
+def take_path_catalog(path):
     name, format_file, path_catalog = input_(path)
-    if os.path.isfile(path_catalog):
+    if checking_file(name,format_file,path_catalog):
         file = open(path_catalog, 'r+')
         file.seek(0)
-        if len(file.read()) != 0:
-            file.close()
+        if not checking_file_is_empty(file,name,format_file):
             return path_catalog
-        else:
-            print(red(f'Файл {name + format_file} пуст'))
-    else:
-        print(red(f'Файл {name + format_file} не найден'))
 
 #Генерация списка количества рецептов в файле и даты его создания
 def get_len_and_date_file(path,lst):
