@@ -105,3 +105,10 @@ def get_matrix_ingredient(lst_composition):
             row=lst_composition[i]
         matrix_ingredient.append(row)
     return matrix_ingredient
+
+#Проверка ингридиентов в каталоге
+def ingredient_in_catalog(lst,ingredient):
+    if lst != []:
+        GUI.print_list(lst)
+    else:
+        print(red(f'Ингредиентов \'{ingredient}\' нет в каталоге'))
