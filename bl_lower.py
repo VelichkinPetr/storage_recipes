@@ -112,3 +112,11 @@ def ingredient_in_catalog(lst,ingredient):
         GUI.print_list(lst)
     else:
         print(red(f'Ингредиентов \'{ingredient}\' нет в каталоге'))
+
+#Проверка рецепта в каталоге
+def recipe_in_catalog(recipe_search,lst_name):
+    if recipe_search in lst_name:
+        return True
+    else:
+        print(red(f'Рецепта {recipe_search} нет в каталоге'))
+        return False
