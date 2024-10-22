@@ -160,3 +160,9 @@ def name_search_ingredient():
     ingredient_name = input(f'\nВведи ингредиент для поиска > ')
     ingredient_name = checking_empty_str(ingredient_name)
     return ingredient_name
+
+def show_succesful_message(text:str):
+    print(bl_lower.green(text))
+
+def show_error_message(text: str):
+    print(bl_lower.red(text))
