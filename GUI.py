@@ -166,3 +166,10 @@ def show_succesful_message(text:str):
 
 def show_error_message(text: str):
     print(bl_lower.red(text))
+
+#Ввод начальных данных
+def input_(path):
+    name = name_new_catalog()
+    format_file = '.txt'
+    path_catalog = path + '\\' + name + format_file
+    return name,format_file,path_catalog

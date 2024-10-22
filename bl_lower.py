@@ -3,13 +3,6 @@ import GUI
 import os
 import datetime
 
-#Ввод начальных данных
-def input_(path):
-    name = GUI.name_new_catalog()
-    format_file = '.txt'
-    path_catalog = path + '\\' + name + format_file
-    return name,format_file,path_catalog
-
 #Проверка существования файла
 def checking_file(path_catalog):
     if not os.path.isfile(path_catalog):
@@ -24,7 +17,7 @@ def checking_file_is_empty(path_catalog):
 
 #Получене пути к каталогу
 def take_path_catalog(path):
-    name, format_file, path_catalog = input_(path)
+    name, format_file, path_catalog = GUI.input_(path)
     if checking_file(path_catalog):
         if not checking_file_is_empty(path_catalog):
             return path_catalog
