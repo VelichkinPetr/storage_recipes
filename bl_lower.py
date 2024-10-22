@@ -14,13 +14,12 @@ def input_(path):
 def checking_file(name,format_file,path_catalog):
     if not os.path.isfile(path_catalog):
         print(red(f'Файл {name + format_file} не найден'))
+        return False
     else:
         return True
-#Проверка, что файл пуст
-def checking_file_is_empty(file,name,format_file):
-    if len(file.read()) == 0:
-        file.close()
-        print(red(f'Файл {name + format_file} пуст'))
+def checking_file_is_empty(path_catalog):
+    if os.stat(path_catalog).st_size == 0:
+        print(red(f'Файл пуст'))
         return True
     else:
         return False
