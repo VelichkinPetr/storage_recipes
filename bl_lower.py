@@ -1,5 +1,4 @@
 #bl_lower - функции вспомогательные для GUI и upper
-import GUI
 import os
 import datetime
 
@@ -135,3 +134,12 @@ def del_recipe(recipe_search,list_names,list_lines_file,path_catalog):
             file = open(path_catalog, 'w')
             file.writelines('\n'.join(list_lines_file))
             file.close()
+
+#Создание списка каталогов
+def create_catalog_list(path,list_dir):
+    list_len_and_date = get_len_and_date_file(path, list_dir)
+    if len(list_dir)!=0:
+        list_catalog = []
+        for i in range(len(list_dir)):
+            list_catalog.append(list_dir[i] + list_len_and_date[i])
+        return list_catalog

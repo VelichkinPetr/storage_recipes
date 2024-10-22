@@ -26,11 +26,8 @@ def create_catalog(path_catalog:str):
 #Получение списка каталогов
 def get_catalog_list(path:str):
     list_dir = os.listdir(path)
-    list_len_and_date = bl_lower.get_len_and_date_file(path,list_dir)
-    if len(list_len_and_date)!=0:
-        list_catalog = []
-        for i in range(len(list_dir)):
-            list_catalog.append(list_dir[i] + list_len_and_date[i])
+    list_catalog = bl_lower.create_catalog_list(path,list_dir)
+    if list_catalog != None:
         GUI.print_list(list_catalog)
     else:
         GUI.show_error_message('Каталогов нет!')
