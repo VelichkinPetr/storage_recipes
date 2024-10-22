@@ -15,10 +15,9 @@ def quit_program():
 
 #Функции работы с каталогами
 #Создание каталога
-def create_catalog(path:str):
-    name,format_file,path_catalog = GUI.input_(path)
-    if os.path.isfile(path_catalog):
-        print(bl_lower.yellow('Такой файл уже существует'))
+def create_catalog(path_catalog:str):
+    if bl_lower.checking_file(path_catalog):
+        GUI.show_error_message('Такой файл уже существует')
     else:
         new_catalog = open(path_catalog,'w')
         new_catalog.close()
@@ -37,26 +36,23 @@ def get_catalog_list(path:str):
         GUI.show_error_message('Каталогов нет!')
 
 #Поиск каталога
-def search_catalog(path:str):
-    name,format_file,path_catalog = GUI.input_(path)
+def search_catalog(path_catalog:str):
     if bl_lower.checking_file(path_catalog):
-        GUI.show_succesful_message(f'Файл {name+format_file} найден')
+        GUI.show_succesful_message('Файл найден')
     else:
-        GUI.show_error_message(f'Файл {name + format_file} не найден')
+        GUI.show_error_message('Файл не найден')
 
 #Удаление каталога
-def delete_catalog(path:str):
-    name,format_file,path_catalog = GUI.input_(path)
+def delete_catalog(path_catalog:str):
     if bl_lower.checking_file(path_catalog):
-        os.remove(path)
+        os.remove(path_catalog)
         GUI.show_succesful_message('Файл успешно удален!')
     else:
-        GUI.show_error_message(f'Файл {name + format_file} не найден')
+        GUI.show_error_message(f'Файл не найден')
 
 #Функции работы с рецептами
 #Добавление рецептов в каталог
-def append_recipe(path:str):
-    name,format_file,path_catalog = GUI.input_(path)
+def append_recipe(path_catalog:str):
     if bl_lower.checking_file(path_catalog):
         app_recipe = ';'.join(GUI.new_recipe())
         with open(path_catalog,'a+') as file_object:
@@ -70,7 +66,7 @@ def append_recipe(path:str):
                 file_object.close()
             GUI.show_succesful_message('Рецепт успешно записан!')
     else:
-        GUI.show_error_message(f'Файл {name + format_file} не найден')
+        GUI.show_error_message(f'Файл не найден')
 
 #Получение списка рецептов в каталоге
 def get_names_recipes(path_catalog: str):
