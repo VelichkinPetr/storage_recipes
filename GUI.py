@@ -73,6 +73,8 @@ def checking_empty_str(name:str) -> str:
         bl_upper.quit_program()
     while name == '':
         name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
+        if name == 'quit':
+            bl_upper.quit_program()
     return name
 
 #Проверка ввода начальных данных или выход из программы
@@ -173,10 +175,4 @@ def input_(path:str):
     name = name_new_catalog()
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
-    if bl_lower.checking_file(path_catalog):
-        if not bl_lower.checking_file_is_empty(path_catalog):
-            return path_catalog
-        else:
-            show_error_message(f'Файл пуст')
-    else:
-        show_error_message(f'Файл не найден')
+    return path_catalog
