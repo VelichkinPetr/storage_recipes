@@ -10,7 +10,7 @@ def create_catalog_dir(path):
 
 #Выход из программы
 def quit_program():
-    print(bl_lower.green('Пока!'))
+    GUI.show_succesful_message('Пока!')
     quit()
 
 #Функции работы с каталогами
@@ -22,7 +22,7 @@ def create_catalog(path):
     else:
         new_catalog = open(path_catalog,'w')
         new_catalog.close()
-        print(bl_lower.green('Файл успешно создан!'))
+        GUI.show_succesful_message('Файл успешно создан!')
 
 #Получение списка каталогов
 def get_catalog_list(path):
@@ -34,20 +34,20 @@ def get_catalog_list(path):
             list_catalog.append(list_dir[i] + list_len_and_date[i])
         GUI.print_list(list_catalog)
     else:
-        print(bl_lower.red(f'Каталогов нет!'))
+        GUI.show_error_message('Каталогов нет!')
 
 #Поиск каталога
 def search_catalog(path):
     name,format_file,path_catalog = GUI.input_(path)
     if bl_lower.checking_file(path_catalog):
-        print(bl_lower.green(f'Файл {name+format_file} найден'))
+        GUI.show_succesful_message(f'Файл {name+format_file} найден')
 
 #Удаление каталога
 def delete_catalog(path):
     name,format_file,path_catalog = GUI.input_(path)
     if bl_lower.checking_file(path_catalog):
         os.remove(path)
-        print(bl_lower.green(f'Файл успешно удален!'))
+        GUI.show_succesful_message('Файл успешно удален!')
 
 
 #Функции работы с рецептами
@@ -65,7 +65,7 @@ def append_recipe(path):
             else:
                 file_object.write(app_recipe)
                 file_object.close()
-            print(bl_lower.green(f'Рецепт успешно записан!'))
+            GUI.show_succesful_message('Рецепт успешно записан!')
 
 #Получение списка рецептов в каталоге
 def get_names_recipes(path_catalog):
@@ -103,7 +103,7 @@ def delete_recipe(names_recipes):
                         file=open(path_catalog,'w')
                         file.writelines('\n'.join(lst))
                         file.close()
-                        print(bl_lower.green(f'Рецепт успешно удален!'))
+                        GUI.show_succesful_message(f'Рецепт успешно удален!')
 
 #Сортировка по Времени приготовления и создания
 def sorting_file_by_column(path_catalog):
