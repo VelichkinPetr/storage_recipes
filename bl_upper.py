@@ -39,13 +39,13 @@ def get_catalog_list(path):
 #Поиск каталога
 def search_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if bl_lower.checking_file(name,format_file,path_catalog):
+    if bl_lower.checking_file(path_catalog):
         print(bl_lower.green(f'Файл {name+format_file} найден'))
 
-
+#Удаление каталога
 def delete_catalog(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if bl_lower.checking_file(name,format_file,path_catalog):
+    if bl_lower.checking_file(path_catalog):
         os.remove(path)
         print(bl_lower.green(f'Файл успешно удален!'))
 
@@ -54,7 +54,7 @@ def delete_catalog(path):
 #Добавление рецептов в каталог
 def append_recipe(path):
     name,format_file,path_catalog = bl_lower.input_(path)
-    if bl_lower.checking_file(name,format_file,path_catalog):
+    if bl_lower.checking_file(path_catalog):
         app_recipe = ';'.join(GUI.new_recipe())
         with open(path_catalog,'a+') as file_object:
             file_object.seek(0)
