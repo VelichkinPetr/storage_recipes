@@ -1,6 +1,5 @@
 #бесконечный цикл работы приложения, в котором мы спрашиваем у пользователя, что он хочет сделать и хочет ли вообще дальше работать
 import bl_upper
-import bl_lower
 import GUI
 
 def core():
@@ -25,13 +24,13 @@ def core():
                 elif function == 'help':
                     GUI.get_help(action)
                 elif function == 'create':
-                    bl_upper.create_catalog(path)
+                    bl_upper.create_catalog(GUI.input_(path))
                 elif function == 'list':
                     bl_upper.get_catalog_list(path)
                 elif function == 'search':
-                    bl_upper.search_catalog(path)
+                    bl_upper.search_catalog(GUI.input_(path))
                 elif function == 'delete':
-                    bl_upper.delete_catalog(path)
+                    bl_upper.delete_catalog(GUI.input_(path))
                 function = GUI.function_name(action)
         elif action == 'recipe':
             if function == 'catalog':
@@ -44,16 +43,16 @@ def core():
                 elif function == 'help':
                     GUI.get_help(action)
                 elif function == 'append':
-                    bl_upper.append_recipe(path)
+                    bl_upper.append_recipe(GUI.input_(path))
                 elif function == 'read':
-                    bl_upper.get_names_recipes( bl_lower.take_path_catalog(path) )
+                    bl_upper.get_names_recipes(GUI.input_(path))
                 elif function == 'sort':
-                    bl_upper.sorting_file_by_column( bl_lower.take_path_catalog(path) )
+                    bl_upper.sorting_recipe(GUI.input_(path))
                 elif function == 'search':
-                    bl_upper.search_recipe( bl_upper.get_names_recipes( bl_lower.take_path_catalog(path) ) )
+                    bl_upper.search_recipe(bl_upper.get_names_recipes(GUI.input_(path)))
                 elif function == 'ingred':
-                    bl_upper.search_recipe_ingredient( bl_lower.take_path_catalog(path) )
+                    bl_upper.search_recipe_ingredient(GUI.input_(path))
                 elif function == 'delete':
-                    bl_upper.delete_recipe( bl_upper.get_names_recipes( bl_lower.take_path_catalog(path) ) )
+                    bl_upper.delete_recipe(bl_upper.get_names_recipes(GUI.input_(path)))
                 function = GUI.function_name(action)
 
