@@ -39,7 +39,7 @@ def get_len_and_date_file(path:str,list_dir:list[str]) -> list[str]:
     return list_len_and_date
 
 #Получение списка столбцов из каталога
-def get_list_column(list_lines_file: str,index_column:int) -> list[str]:
+def get_list_column(list_lines_file: str,index_column:int) -> list:
     lst_matrix = []
     for line in list_lines_file:
         row = line.split(';')
@@ -90,7 +90,7 @@ def get_matrix_ingredient(lst_composition:list[str]) -> list[list[str]]:
     return matrix_ingredient
 
 #Получение списка рецептов с искомым ингридиентом(ами)
-def ingredient_in_catalog(list_search_ingredient,matrix_ingredient,list_lines_file):
+def ingredient_in_catalog(list_search_ingredient:list[str],matrix_ingredient:list[list[str]],list_lines_file:list[str]) -> list[str]:
     list_recipe = []
     for search in list_search_ingredient:
         for i in range(len(matrix_ingredient)):
@@ -118,7 +118,7 @@ def write_recipe(path_catalog:str,app_recipe:str):
             file_object.close()
 
 #Получение искомого рецепта
-def get_recipe(recipe_search,list_names,list_lines_file):
+def get_recipe(recipe_search:str,list_names:list[str],list_lines_file:list[str]) -> str:
     for i, name_recipe in enumerate(list_names):
         if recipe_search == name_recipe:
             index_search_name = i
@@ -126,7 +126,7 @@ def get_recipe(recipe_search,list_names,list_lines_file):
             return found_recipe
 
 #Удаление рецепта
-def del_recipe(recipe_search,list_names,list_lines_file,path_catalog):
+def del_recipe(recipe_search:str,list_names:list[str],list_lines_file:list[str],path_catalog:str):
     for i, string in enumerate(list_names):
         if recipe_search == string:
             index_search_name = i
@@ -136,7 +136,7 @@ def del_recipe(recipe_search,list_names,list_lines_file,path_catalog):
             file.close()
 
 #Создание списка каталогов
-def create_catalog_list(path,list_dir):
+def create_catalog_list(path:str,list_dir:list[str]) -> list[str]:
     list_len_and_date = get_len_and_date_file(path, list_dir)
     if len(list_dir)!=0:
         list_catalog = []
