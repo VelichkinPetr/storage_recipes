@@ -18,7 +18,7 @@ def info():
                         f'Для завершения работы приложения, введите \'{bl_lower.yellow('quit')}\'\n'))
 
 #Подсказка для пользователя о функция доступных с конкретными данными
-def get_help(action):
+def get_help(action:str):
     if action == 'catalog':
         print(bl_lower.blue('\nДоступные функции для работы с Каталогом:\n'
               f'{bl_lower.yellow('recipe')} - перейти к работе с рецептами\n'
@@ -41,7 +41,7 @@ def get_help(action):
               f'{bl_lower.yellow('quit')} - завершение работы приложения'))
 
 #Создание директории для хранения каталогов
-def path_dir_catalog():
+def path_dir_catalog() -> str:
     path_catalog = input('Введи директорию, где будут храниться каталоги > ')
     while not os.path.isdir(path_catalog):
         if path_catalog == 'quit':
@@ -56,25 +56,25 @@ def path_dir_catalog():
 
 
 #Ввод и проверка имени объекта взаимодействия
-def action_name():
+def action_name() -> str:
     action = input(f'\nС чем хотите работать({bl_lower.yellow('catalog, recipe')}) > ')
     action = checking_input(action,list_name_action)
     return action
 
 #Ввод и проверка имени функции
-def function_name(action):
+def function_name(action:str)-> str:
     function = input(f'\nВыберите действие с {bl_lower.yellow(action)} > ')
     function = checking_input(function,list_name_function)
     return function
 
 #Проверка ввода на пустую строку
-def checking_empty_str(name):
+def checking_empty_str(name:str) -> str:
     while name == '':
         name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
     return name
 
 #Проверка ввода начальных данных или выход из программы
-def checking_input(name,lst):
+def checking_input(name:str,lst:list[str]) -> str:
     while name not in lst:
         if name == 'quit':
             bl_upper.quit_program()
@@ -85,19 +85,19 @@ def checking_input(name,lst):
     return name
 
 #Печать списка
-def print_list(lst):
+def print_list(lst:list[str]):
     print()
     for elem in lst:
         print(elem)
 
 #Проверка ввода имени каталога и пути его создания:
-def name_new_catalog():
+def name_new_catalog() -> str:
     name_catalog = input('\nВведи имя каталога > ')
     name_catalog = checking_empty_str(name_catalog)
     return name_catalog
 
 #Ввод и проверка нового рецепта
-def new_recipe():
+def new_recipe()-> list[str]:
     string = []
     name = input('\nНазвание рецепта > ')
     name = checking_empty_str(name)
@@ -118,13 +118,13 @@ def new_recipe():
     return string
 
 #Ввод и проверка имени рецепта для поиска
-def name_recipe():
+def name_recipe() -> str:
     recipe_name=input(f'\nВведи имя рецепта > ')
     recipe_name = checking_empty_str(recipe_name)
     return recipe_name
 
 #Ввод и проверка
-def get_index_sort():
+def get_index_sort() -> int:
     print(f'Для сортировки по Времени приготовления,    введите {bl_lower.yellow('1')}\n'
           f'               по Времени создания рецепта, введите {bl_lower.yellow('2')}')
     name_sort=input(f'\nСортировка по > ')
@@ -136,7 +136,7 @@ def get_index_sort():
     return name_sort
 
 #Выбор направления сортировки
-def get_sort_up_or_down():
+def get_sort_up_or_down() -> bool:
     print(f'Для сортировки по Возрастанию, введите {bl_lower.yellow('1')} \n'
           f'               по Убыванию,    введите {bl_lower.yellow('2')} ')
     name_sort = input(f'\nСортировка по > ')
@@ -148,15 +148,14 @@ def get_sort_up_or_down():
     return name_sort
 
 #Вывод сортированного списка
-def print_sort_list(list_name,list_column,list_sort):
+def print_sort_list(list_name:list[str],list_column:list[str],list_sort:list[str]):
     for i in range(len(list_sort)):
         if list_sort[i] in list_column:
             index = list_column.index(list_sort[i])
-            name_recipe = list_name[index]
-            print(name_recipe, '\t', list_sort[i])
+            print(list_name[index], '\t', list_sort[i])
 
 #Ввод ингредиентов для поиска рецепта
-def name_search_ingredient():
+def name_search_ingredient() -> str:
     ingredient_name = input(f'\nВведи ингредиент для поиска > ')
     ingredient_name = checking_empty_str(ingredient_name)
     return ingredient_name
@@ -168,7 +167,7 @@ def show_error_message(text: str):
     print(bl_lower.red(text))
 
 #Ввод начальных данных
-def input_(path):
+def input_(path:str):
     name = name_new_catalog()
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
