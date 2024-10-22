@@ -119,3 +119,13 @@ def get_recipe(recipe_search,list_names,list_lines_file):
             index_search_name = i
             found_recipe = ';\n'.join(list_lines_file[index_search_name].split(';'))
             return found_recipe
+
+#Удаление рецепта
+def del_recipe(recipe_search,list_names,list_lines_file,path_catalog):
+    for i, string in enumerate(list_names):
+        if recipe_search == string:
+            index_search_name = i
+            del list_lines_file[index_search_name]
+            file = open(path_catalog, 'w')
+            file.writelines('\n'.join(list_lines_file))
+            file.close()

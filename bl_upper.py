@@ -87,19 +87,13 @@ def search_recipe(names_recipes):
 #Удаление рецепта
 def delete_recipe(names_recipes):
     if names_recipes != None:
-            lst_name,lst,path_catalog = names_recipes
-            recipe_search = GUI.name_recipe()
-            if bl_lower.recipe_in_catalog(recipe_search,lst_name):
-                for i, string in enumerate(lst_name):
-                    if recipe_search == string:
-                        index_search_name = i
-                        del lst[index_search_name]
-                        file=open(path_catalog,'w')
-                        file.writelines('\n'.join(lst))
-                        file.close()
-                        GUI.show_succesful_message(f'Рецепт успешно удален!')
-            else:
-                GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
+        list_names,list_lines_file,path_catalog = names_recipes
+        recipe_search = GUI.name_recipe()
+        if bl_lower.recipe_in_catalog(recipe_search,list_names):
+            bl_lower.del_recipe(recipe_search,list_names,list_lines_file,path_catalog)
+            GUI.show_succesful_message(f'Рецепт успешно удален!')
+        else:
+            GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
 
 #Сортировка по Времени приготовления и создания
 def sorting_file_by_column(path_catalog:str):
