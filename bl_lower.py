@@ -99,3 +99,15 @@ def recipe_in_catalog(recipe_search:str,lst_name:list[str]) -> bool:
     if recipe_search in lst_name:
         return True
     return False
+
+#Запись рецепта в каталог
+def write_recipe(path_catalog:str,app_recipe:str):
+    with open(path_catalog, 'a+') as file_object:
+        file_object.seek(0)
+        data = file_object.read(100)
+        if len(data) > 0:
+            file_object.write('\n' + app_recipe)
+            file_object.close()
+        else:
+            file_object.write(app_recipe)
+            file_object.close()

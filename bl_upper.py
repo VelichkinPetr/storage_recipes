@@ -55,16 +55,8 @@ def delete_catalog(path_catalog:str):
 def append_recipe(path_catalog:str):
     if bl_lower.checking_file(path_catalog):
         app_recipe = ';'.join(GUI.new_recipe())
-        with open(path_catalog,'a+') as file_object:
-            file_object.seek(0)
-            data = file_object.read(100)
-            if len(data)>0:
-                file_object.write('\n' + app_recipe)
-                file_object.close()
-            else:
-                file_object.write(app_recipe)
-                file_object.close()
-            GUI.show_succesful_message('Рецепт успешно записан!')
+        bl_lower.write_recipe(path_catalog,app_recipe)
+        GUI.show_succesful_message('Рецепт успешно записан!')
     else:
         GUI.show_error_message(f'Файл не найден')
 
