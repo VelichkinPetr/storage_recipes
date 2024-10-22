@@ -49,8 +49,11 @@ def get_list_column(list_lines_file: str,index_column:int) -> list[str]:
     list_column = []
     for i in range(len(lst_matrix)):
         index_start = lst_matrix[i][index_column].index(':') + 1
-        name_recipe = lst_matrix[i][index_column][index_start:]
-        list_column.append(name_recipe)
+        item = lst_matrix[i][index_column][index_start:]
+        if index_column == 3:
+            list_column.append(int(item))
+        else:
+            list_column.append(item)
     return list_column
 
 #Цветовая окраска выводимых сообщений

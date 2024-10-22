@@ -96,8 +96,8 @@ def delete_recipe(names_recipes):
             GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
 
 #Сортировка по Времени приготовления и создания
-def sorting_file_by_column(path_catalog:str):
-    if isinstance(path_catalog, str):
+def sorting_recipe(path_catalog:str):
+    if bl_lower.checking_file(path_catalog) and not bl_lower.checking_file_is_empty(path_catalog):
         list_lines_file = bl_lower.get_file_contents(path_catalog)
         lst_name = bl_lower.get_list_column(list_lines_file, 0)
 
