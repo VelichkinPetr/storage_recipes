@@ -28,9 +28,7 @@ def checking_file_is_empty(path_catalog):
 def take_path_catalog(path):
     name, format_file, path_catalog = input_(path)
     if checking_file(name,format_file,path_catalog):
-        file = open(path_catalog, 'r+')
-        file.seek(0)
-        if not checking_file_is_empty(file,name,format_file):
+        if not checking_file_is_empty(path_catalog):
             return path_catalog
 
 #Преобразование файла в список строк
