@@ -90,12 +90,15 @@ def get_matrix_ingredient(lst_composition:list[str]) -> list[list[str]]:
         matrix_ingredient.append(row)
     return matrix_ingredient
 
-#Проверка ингридиентов в каталоге
-def ingredient_in_catalog(lst,ingredient):
-    if lst != []:
-        GUI.print_list(lst)
-    else:
-        print(red(f'Ингредиентов \'{ingredient}\' нет в каталоге'))
+#Получение списка рецептов с искомым ингридиентом(ами)
+def ingredient_in_catalog(list_search_ingredient,matrix_ingredient,list_lines_file):
+    list_recipe = []
+    for search in list_search_ingredient:
+        for i in range(len(matrix_ingredient)):
+            for j in range(len(matrix_ingredient[i])):
+                if search in matrix_ingredient[i][j] and list_lines_file[i] not in list_recipe:
+                    list_recipe.append(list_lines_file[i])
+    return list_recipe
 
 #Проверка рецепта в каталоге
 def recipe_in_catalog(recipe_search:str,lst_name:list[str]) -> bool:

@@ -111,7 +111,7 @@ def sorting_recipe(path_catalog:str):
 
 #Поиск рецепта по ингредиентам
 def search_recipe_ingredient(path_catalog:str):
-    if isinstance(path_catalog, str):
+    if bl_lower.checking_file(path_catalog) and not bl_lower.checking_file_is_empty(path_catalog):
         list_lines_file = bl_lower.get_file_contents(path_catalog)
 
         lst_composition = bl_lower.get_list_column(list_lines_file, 1)
@@ -120,12 +120,9 @@ def search_recipe_ingredient(path_catalog:str):
         search_ingredient = GUI.name_search_ingredient()
         list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
 
-        # Создание списка рецептов с искомыми ингредиентами
-        list_recipe = []
-        for search in list_search_ingredient:
-            for i in range(len(matrix_ingredient)):
-                for j in range(len(matrix_ingredient[i])):
-                    if search in matrix_ingredient[i][j] and list_lines_file[i] not in list_recipe:
-                        list_recipe.append(list_lines_file[i])
-        bl_lower.ingredient_in_catalog(list_recipe,search_ingredient)
+        list_recipe = bl_lower.ingredient_in_catalog(list_search_ingredient,matrix_ingredient,list_lines_file)
+        if list_recipe != []:
+            GUI.print_list(list_recipe)
+        else:
+            GUI.show_error_message(f'Ингредиентов \'{search_ingredient}\' нет в каталоге')
 
