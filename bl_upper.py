@@ -62,13 +62,16 @@ def append_recipe(path_catalog:str):
 
 #Получение списка рецептов в каталоге
 def get_names_recipes(path_catalog: str):
-    if isinstance(path_catalog,str):
-        list_lines_file = bl_lower.get_file_contents(path_catalog)
-
-        index_column=0
-        list_names=bl_lower.get_list_column(list_lines_file,index_column)
-        GUI.print_list(list_names)
-        return list_names,list_lines_file,path_catalog
+    if bl_lower.checking_file(path_catalog):
+        if not bl_lower.checking_file_is_empty(path_catalog):
+            list_lines_file = bl_lower.get_file_contents(path_catalog)
+            list_names=bl_lower.get_list_column(list_lines_file,0)
+            GUI.print_list(list_names)
+            return list_names,list_lines_file,path_catalog
+        else:
+            GUI.show_error_message(f'Файл пуст')
+    else:
+        GUI.show_error_message(f'Файл не найден')
 
 #Поиск рецепта
 def search_recipe(names_recipes):
