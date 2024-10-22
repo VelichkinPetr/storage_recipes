@@ -4,19 +4,19 @@ import os
 import datetime
 
 #Проверка существования файла
-def checking_file(path_catalog):
-    if not os.path.isfile(path_catalog):
-        return False
-    else:
+def checking_file(path_catalog :str) -> bool:
+    if os.path.isfile(path_catalog):
         return True
-def checking_file_is_empty(path_catalog):
+    return False
+
+#Проверка что файл пуст
+def checking_file_is_empty(path_catalog:str) -> bool:
     if os.stat(path_catalog).st_size == 0:
         return True
-    else:
-        return False
+    return False
 
 #Получене пути к каталогу
-def take_path_catalog(path):
+def take_path_catalog(path:str):
     name, format_file, path_catalog = GUI.input_(path)
     if checking_file(path_catalog):
         if not checking_file_is_empty(path_catalog):
@@ -27,20 +27,20 @@ def take_path_catalog(path):
         GUI.show_error_message(f'Файл {name + format_file} не найден')
 
 #Преобразование файла в список строк
-def get_list_str_from_file(path_catalog):
+def get_file_contents(path_catalog:str) -> list[str]:
     file = open(path_catalog, 'r+')
     file.seek(0)
-    lst = []
+    lines = []
     for string in file:
-        lst.append(string[:-1])
+        lines.append(string[:-1])
     file.close()
-    return lst
+    return lines
 
 #Генерация списка количества рецептов в файле и даты его создания
-def get_len_and_date_file(path,lst):
+def get_len_and_date_file(path:str,list_dir:list[str]) -> list[str]:
     list_len_and_date = []
-    if len(lst) != 0:
-        for catalog in lst:
+    if len(list_dir) != 0:
+        for catalog in list_dir:
             file = open(path + r'\\' + catalog, 'r')
             len_catalog = 0
             for line in file:
@@ -51,9 +51,9 @@ def get_len_and_date_file(path,lst):
     return list_len_and_date
 
 #Получение списка столбцов из каталога
-def get_list_column(lst,index_column):
+def get_list_column(list_lines_file: str,index_column:int) -> list[str]:
     lst_matrix = []
-    for line in lst:
+    for line in list_lines_file:
         row = line.split(';')
         lst_matrix.append(row)
 
@@ -65,20 +65,20 @@ def get_list_column(lst,index_column):
     return list_column
 
 #Цветовая окраска выводимых сообщений
-def blue(text):
+def blue(text:str) -> str:
     return f'\033[34m{text}'
 
-def red(text):
+def red(text:str) -> str:
     return f'\033[31m{text}\033[34m'
 
-def yellow(text):
+def yellow(text:str) -> str:
     return f'\033[33m{text}\033[34m'
 
-def green(text):
+def green(text:str) -> str:
     return f'\033[32m{text}\033[34m'
 
 #Преобразование искомого(ых) ингредиента(ов) в список
-def get_list_search_ingredient(search_ingredient):
+def get_list_search_ingredient(search_ingredient:str) -> list[str]:
     if len(search_ingredient)>1:
         list_search_ingredient = search_ingredient.replace(' ','').split(',')
     else:
@@ -86,7 +86,7 @@ def get_list_search_ingredient(search_ingredient):
     return list_search_ingredient
 
 #Преобразование Списка составов в Матрицу ингредиентов
-def get_matrix_ingredient(lst_composition):
+def get_matrix_ingredient(lst_composition:list[str]) -> list[list[str]]:
     matrix_ingredient=[]
     for i,line in enumerate(lst_composition):
         if len(line)>1:
@@ -106,9 +106,7 @@ def ingredient_in_catalog(lst,ingredient):
         print(red(f'Ингредиентов \'{ingredient}\' нет в каталоге'))
 
 #Проверка рецепта в каталоге
-def recipe_in_catalog(recipe_search,lst_name):
+def recipe_in_catalog(recipe_search:str,lst_name:list[str]) -> bool:
     if recipe_search in lst_name:
         return True
-    else:
-        print(red(f'Рецепта {recipe_search} нет в каталоге'))
-        return False
+    return False
