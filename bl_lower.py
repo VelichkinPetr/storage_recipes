@@ -111,3 +111,11 @@ def write_recipe(path_catalog:str,app_recipe:str):
         else:
             file_object.write(app_recipe)
             file_object.close()
+
+#Получение искомого рецепта
+def get_recipe(recipe_search,list_names,list_lines_file):
+    for i, name_recipe in enumerate(list_names):
+        if recipe_search == name_recipe:
+            index_search_name = i
+            found_recipe = ';\n'.join(list_lines_file[index_search_name].split(';'))
+            return found_recipe

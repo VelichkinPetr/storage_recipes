@@ -76,15 +76,11 @@ def get_names_recipes(path_catalog: str):
 #Поиск рецепта
 def search_recipe(names_recipes):
     if names_recipes != None:
-        lst_name,lst,path_catalog = names_recipes
+        list_names,list_lines_file,path_catalog = names_recipes
         recipe_search = GUI.name_recipe()
-        if bl_lower.recipe_in_catalog(recipe_search,lst_name):
-            for i, string in enumerate(lst_name):
-                if recipe_search == string:
-                    index_search_name = i
-                    new_lst_search = ';\n'.join(lst[index_search_name].split(';'))
-                    print(new_lst_search)
-                    return new_lst_search,lst
+        if bl_lower.recipe_in_catalog(recipe_search, list_names):
+            found_recipe = bl_lower.get_recipe(recipe_search,list_names,list_lines_file)
+            print(found_recipe)
         else:
             GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
 
