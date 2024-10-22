@@ -15,17 +15,6 @@ def checking_file_is_empty(path_catalog:str) -> bool:
         return True
     return False
 
-#Получене пути к каталогу
-def take_path_catalog(path:str):
-    name, format_file, path_catalog = GUI.input_(path)
-    if checking_file(path_catalog):
-        if not checking_file_is_empty(path_catalog):
-            return path_catalog
-        else:
-            GUI.show_error_message(f'Файл {name + format_file} пуст')
-    else:
-        GUI.show_error_message(f'Файл {name + format_file} не найден')
-
 #Преобразование файла в список строк
 def get_file_contents(path_catalog:str) -> list[str]:
     file = open(path_catalog, 'r+')

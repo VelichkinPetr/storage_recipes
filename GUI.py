@@ -173,4 +173,10 @@ def input_(path:str):
     name = name_new_catalog()
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
-    return path_catalog
+    if bl_lower.checking_file(path_catalog):
+        if not bl_lower.checking_file_is_empty(path_catalog):
+            return path_catalog
+        else:
+            show_error_message(f'Файл пуст')
+    else:
+        show_error_message(f'Файл не найден')
