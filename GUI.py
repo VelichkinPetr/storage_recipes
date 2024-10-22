@@ -69,6 +69,8 @@ def function_name(action:str)-> str:
 
 #Проверка ввода на пустую строку
 def checking_empty_str(name:str) -> str:
+    if name == 'quit':
+        bl_upper.quit_program()
     while name == '':
         name = input(bl_lower.red('Вы ничего не ввели, попробуйте снова > '))
     return name
@@ -120,7 +122,7 @@ def new_recipe()-> list[str]:
 #Ввод и проверка имени рецепта для поиска
 def name_recipe() -> str:
     recipe_name=input(f'\nВведи имя рецепта > ')
-    recipe_name = checking_empty_str(recipe_name)
+    recipe_name=checking_empty_str(recipe_name)
     return recipe_name
 
 #Ввод и проверка
@@ -171,4 +173,4 @@ def input_(path:str):
     name = name_new_catalog()
     format_file = '.txt'
     path_catalog = path + '\\' + name + format_file
-    return name,format_file,path_catalog
+    return path_catalog
