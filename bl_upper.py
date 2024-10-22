@@ -4,7 +4,7 @@ import GUI
 import bl_lower
 
 #Создание директории для каталогов
-def create_catalog_dir(path):
+def create_catalog_dir(path:str):
     if not os.path.isdir(path):
         return os.mkdir(path+'\\')
 
@@ -94,32 +94,46 @@ def delete_recipe(names_recipes):
 
 #Сортировка по Времени приготовления и создания
 def sorting_recipe(path_catalog:str):
-    if bl_lower.checking_file(path_catalog) and not bl_lower.checking_file_is_empty(path_catalog):
-        list_lines_file = bl_lower.get_file_contents(path_catalog)
-        lst_name = bl_lower.get_list_column(list_lines_file, 0)
+    if bl_lower.checking_file(path_catalog):
+        if not bl_lower.checking_file_is_empty(path_catalog):
 
-        index_column = GUI.get_index_sort()
-        lst_column=bl_lower.get_list_column(list_lines_file,index_column)
+            list_lines_file = bl_lower.get_file_contents(path_catalog)
+            lst_name = bl_lower.get_list_column(list_lines_file, 0)
 
-        sort_up_or_down=GUI.get_sort_up_or_down()
-        lst_sort = sorted(lst_column,reverse=sort_up_or_down)
+            index_column = GUI.get_index_sort()
+            lst_column=bl_lower.get_list_column(list_lines_file,index_column)
 
-        GUI.print_sort_list(lst_name,lst_column,lst_sort)
+            sort_up_or_down=GUI.get_sort_up_or_down()
+            lst_sort = sorted(lst_column,reverse=sort_up_or_down)
+
+            GUI.print_sort_list(lst_name,lst_column,lst_sort)
+            
+        else:
+            GUI.show_error_message('Файл пуст')
+    else:
+        GUI.show_error_message('Файла не найден')
+
 
 #Поиск рецепта по ингредиентам
 def search_recipe_ingredient(path_catalog:str):
-    if bl_lower.checking_file(path_catalog) and not bl_lower.checking_file_is_empty(path_catalog):
-        list_lines_file = bl_lower.get_file_contents(path_catalog)
+    if bl_lower.checking_file(path_catalog):
+        if not bl_lower.checking_file_is_empty(path_catalog):
 
-        lst_composition = bl_lower.get_list_column(list_lines_file, 1)
-        matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
+            list_lines_file = bl_lower.get_file_contents(path_catalog)
 
-        search_ingredient = GUI.name_search_ingredient()
-        list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
+            lst_composition = bl_lower.get_list_column(list_lines_file, 1)
+            matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
 
-        list_recipe = bl_lower.ingredient_in_catalog(list_search_ingredient,matrix_ingredient,list_lines_file)
-        if list_recipe != []:
-            GUI.print_list(list_recipe)
+            search_ingredient = GUI.name_search_ingredient()
+            list_search_ingredient = bl_lower.get_list_search_ingredient(search_ingredient)
+
+            list_recipe = bl_lower.ingredient_in_catalog(list_search_ingredient,matrix_ingredient,list_lines_file)
+            if list_recipe != []:
+                GUI.print_list(list_recipe)
+            else:
+                GUI.show_error_message(f'Ингредиентов \'{search_ingredient}\' нет в каталоге')
+
         else:
-            GUI.show_error_message(f'Ингредиентов \'{search_ingredient}\' нет в каталоге')
-
+            GUI.show_error_message('Файл пуст')
+    else:
+        GUI.show_error_message('Файла не найден')
