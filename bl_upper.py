@@ -15,7 +15,7 @@ def quit_program():
 
 #Функции работы с каталогами
 #Создание каталога
-def create_catalog(path):
+def create_catalog(path:str):
     name,format_file,path_catalog = GUI.input_(path)
     if os.path.isfile(path_catalog):
         print(bl_lower.yellow('Такой файл уже существует'))
@@ -25,7 +25,7 @@ def create_catalog(path):
         GUI.show_succesful_message('Файл успешно создан!')
 
 #Получение списка каталогов
-def get_catalog_list(path):
+def get_catalog_list(path:str):
     list_dir = os.listdir(path)
     list_len_and_date = bl_lower.get_len_and_date_file(path,list_dir)
     if len(list_len_and_date)!=0:
@@ -37,22 +37,25 @@ def get_catalog_list(path):
         GUI.show_error_message('Каталогов нет!')
 
 #Поиск каталога
-def search_catalog(path):
+def search_catalog(path:str):
     name,format_file,path_catalog = GUI.input_(path)
     if bl_lower.checking_file(path_catalog):
         GUI.show_succesful_message(f'Файл {name+format_file} найден')
+    else:
+        GUI.show_error_message(f'Файл {name + format_file} не найден')
 
 #Удаление каталога
-def delete_catalog(path):
+def delete_catalog(path:str):
     name,format_file,path_catalog = GUI.input_(path)
     if bl_lower.checking_file(path_catalog):
         os.remove(path)
         GUI.show_succesful_message('Файл успешно удален!')
-
+    else:
+        GUI.show_error_message(f'Файл {name + format_file} не найден')
 
 #Функции работы с рецептами
 #Добавление рецептов в каталог
-def append_recipe(path):
+def append_recipe(path:str):
     name,format_file,path_catalog = GUI.input_(path)
     if bl_lower.checking_file(path_catalog):
         app_recipe = ';'.join(GUI.new_recipe())
@@ -66,16 +69,18 @@ def append_recipe(path):
                 file_object.write(app_recipe)
                 file_object.close()
             GUI.show_succesful_message('Рецепт успешно записан!')
+    else:
+        GUI.show_error_message(f'Файл {name + format_file} не найден')
 
 #Получение списка рецептов в каталоге
-def get_names_recipes(path_catalog):
+def get_names_recipes(path_catalog: str):
     if isinstance(path_catalog,str):
-        lst = bl_lower.get_list_str_from_file(path_catalog)
+        list_lines_file = bl_lower.get_file_contents(path_catalog)
 
         index_column=0
-        lst_name=bl_lower.get_list_column(lst,index_column)
-        GUI.print_list(lst_name)
-        return lst_name,lst,path_catalog
+        list_names=bl_lower.get_list_column(list_lines_file,index_column)
+        GUI.print_list(list_names)
+        return list_names,list_lines_file,path_catalog
 
 #Поиск рецепта
 def search_recipe(names_recipes):
@@ -89,6 +94,8 @@ def search_recipe(names_recipes):
                     new_lst_search = ';\n'.join(lst[index_search_name].split(';'))
                     print(new_lst_search)
                     return new_lst_search,lst
+        else:
+            GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
 
 #Удаление рецепта
 def delete_recipe(names_recipes):
@@ -104,15 +111,17 @@ def delete_recipe(names_recipes):
                         file.writelines('\n'.join(lst))
                         file.close()
                         GUI.show_succesful_message(f'Рецепт успешно удален!')
+            else:
+                GUI.show_error_message(f'Рецепта {recipe_search} нет в каталоге')
 
 #Сортировка по Времени приготовления и создания
-def sorting_file_by_column(path_catalog):
+def sorting_file_by_column(path_catalog:str):
     if isinstance(path_catalog, str):
-        lst = bl_lower.get_list_str_from_file(path_catalog)
-        lst_name = bl_lower.get_list_column(lst, 0)
+        list_lines_file = bl_lower.get_file_contents(path_catalog)
+        lst_name = bl_lower.get_list_column(list_lines_file, 0)
 
         index_column = GUI.get_index_sort()
-        lst_column=bl_lower.get_list_column(lst,index_column)
+        lst_column=bl_lower.get_list_column(list_lines_file,index_column)
 
         sort_up_or_down=GUI.get_sort_up_or_down()
         lst_sort = sorted(lst_column,reverse=sort_up_or_down)
@@ -120,11 +129,11 @@ def sorting_file_by_column(path_catalog):
         GUI.print_sort_list(lst_name,lst_column,lst_sort)
 
 #Поиск рецепта по ингредиентам
-def search_recipe_ingredient(path_catalog):
+def search_recipe_ingredient(path_catalog:str):
     if isinstance(path_catalog, str):
-        lst = bl_lower.get_list_str_from_file(path_catalog)
+        list_lines_file = bl_lower.get_file_contents(path_catalog)
 
-        lst_composition = bl_lower.get_list_column(lst, 1)
+        lst_composition = bl_lower.get_list_column(list_lines_file, 1)
         matrix_ingredient = bl_lower.get_matrix_ingredient(lst_composition)
 
         search_ingredient = GUI.name_search_ingredient()
@@ -135,7 +144,7 @@ def search_recipe_ingredient(path_catalog):
         for search in list_search_ingredient:
             for i in range(len(matrix_ingredient)):
                 for j in range(len(matrix_ingredient[i])):
-                    if search in matrix_ingredient[i][j] and lst[i] not in list_recipe:
-                        list_recipe.append(lst[i])
+                    if search in matrix_ingredient[i][j] and list_lines_file[i] not in list_recipe:
+                        list_recipe.append(list_lines_file[i])
         bl_lower.ingredient_in_catalog(list_recipe,search_ingredient)
 
